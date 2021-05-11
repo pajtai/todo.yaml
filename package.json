@@ -1,0 +1,31 @@
+{
+  "name": "todo.yaml",
+  "version": "1.0.0-rc1",
+  "description": "A flexible, configurable, and file-based todo tracker.",
+  "main": "cli.js",
+  "bin": {
+    "todo": "./cli.js"
+  },
+  "scripts": {
+    "start": "todo",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pajtai/todo.yaml.git"
+  },
+  "keywords": [
+    "todo",
+    "yaml",
+    "configurable"
+  ],
+  "author": "Peter Ajtai",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pajtai/todo.yaml/issues"
+  },
+  "homepage": "https://github.com/pajtai/todo.yaml#readme",
+  "dependencies": {
+    "yaml": "^1.10.2"
+  }
+}
