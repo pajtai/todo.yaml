@@ -2,11 +2,19 @@
 
 > A flexible, configurable, and file-based todo tracker.
 
+## Concepts
+- todo.yaml: You can have as many of these as you want. Each tracks todos based on a configuration file in the same directory
+- todo-config.yaml: The configuration file for the specific todo.yaml you are working with
+
 ## Getting started
 
 ```shell
 npm i -g todo.yaml
 ```
+
+You can now run the "todo" command globally
+
+The command will execute on the nearest todo.yaml file found searching the current directory and each parent directory
 
 ## Dev Workflow
 

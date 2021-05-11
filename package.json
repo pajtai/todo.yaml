@@ -26,6 +26,7 @@
   },
   "homepage": "https://github.com/pajtai/todo.yaml#readme",
   "dependencies": {
+    "inquirer": "^8.0.0",
     "yaml": "^1.10.2"
   }
 }
