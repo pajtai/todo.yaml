@@ -4,6 +4,7 @@ import defaultTodoFile from "./src/default-todo.js";
 import findUp from "find-up";
 import YAML from "yaml";
 import inquirer from "inquirer";
+import chalk from "chalk";
 
 const todoFileName = "todo.yaml";
 // TODO: configure yaml location first time cli is run
@@ -18,8 +19,22 @@ const todoFileName = "todo.yaml";
 let todoFilePath = await findUp(todoFileName);
 if (!todoFilePath) {
     try {
-        await writeFile("todo.yaml", defaultTodoFile);
-        todoFilePath = "todo.yaml";
+        const answers = await inquirer
+            .prompt([
+                {
+                    name: "Confirm",
+                    type: "confirm",
+                    message: "todo.yaml not found. Create a todo.yaml in this directory?",
+                    default: false
+                }
+            ]);
+        if (answers.Confirm) {
+            await writeFile("todo.yaml", defaultTodoFile);
+            todoFilePath = "todo.yaml";
+        } else {
+            console.log("Please go to the directory you want your todo.yaml, and try again.");
+            process.exit();
+        }
     } catch (err) {
         console.log(`Whoops. Couldn't create todo.yaml: ${err}`);
     }
@@ -27,10 +42,30 @@ if (!todoFilePath) {
 const todoFile = await readFile(todoFilePath, "utf-8");
 const todo = YAML.parse(todoFile);
 
-inquirer.prompt([
-    {
-        name: "Todo List",
-        type: "checkbox",
-        choices: todo.todo
+const choices = todo.todo.map((todo, index) => {
+    return {
+        name: todo,
+        value: index
     }
-]);
+});
+choices.push({
+    name: `+ ` + chalk.green(`Add a todo`),
+    value: `add todo`
+})
+inquirer
+    .prompt([
+        {
+            name: "Todo List",
+            type: "checkbox",
+            choices
+        }
+    ])
+    .then(async answers => {
+        const answer = answers["Todo List"];
+        if (isNaN(answer)) {
+            console.log("add a todo!")
+        } else {
+            todo.todo.splice(answer, 1);
+            await writeFile(todoFilePath, YAML.stringify(todo));
+        }
+    });
