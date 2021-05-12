@@ -41,31 +41,47 @@ if (!todoFilePath) {
 }
 const todoFile = await readFile(todoFilePath, "utf-8");
 const todo = YAML.parse(todoFile);
+await showAndModifyTodoList();
 
-const choices = todo.todo.map((todo, index) => {
-    return {
-        name: todo,
-        value: index
-    }
-});
-choices.push({
-    name: `+ ` + chalk.green(`Add a todo`),
-    value: `add todo`
-})
-inquirer
-    .prompt([
-        {
-            name: "Todo List",
-            type: "checkbox",
-            choices
-        }
-    ])
-    .then(async answers => {
-        const answer = answers["Todo List"];
-        if (isNaN(answer)) {
-            console.log("add a todo!")
-        } else {
-            todo.todo.splice(answer, 1);
-            await writeFile(todoFilePath, YAML.stringify(todo));
+async function showAndModifyTodoList () {
+    console.clear();
+    const choices = todo.todo.map((todo, index) => {
+        return {
+            name: todo,
+            value: index
         }
     });
+    choices.push({
+        name: `+ ` + chalk.green(`Add a todo`),
+        value: `add todo`
+    })
+    const answers = await inquirer
+        .prompt([
+            {
+                name: "Todo List",
+                type: "checkbox",
+                choices
+            }
+        ]);
+
+    const answer = answers["Todo List"];
+    if (isNaN(answer)) {
+        console.log("add a todo!");
+        const answers = await inquirer
+            .prompt([
+                {
+                    name: "Task To Add",
+                    type: "input"
+                }
+            ]);
+        const todoItem = answers["Task To Add"];
+        todo.todo.push(todoItem);
+    } else {
+        todo.todo.splice(answer, 1);
+    }
+
+    await writeFile(todoFilePath, YAML.stringify(todo));
+    await showAndModifyTodoList();
+}
+
+
