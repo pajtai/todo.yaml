@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 import { readFile, writeFile } from "fs/promises";
+import defaultTodoFile from "./src/default-todo.js";
 import findUp from "find-up";
 import YAML from "yaml";
 import inquirer from "inquirer";
 
 const todoFileName = "todo.yaml";
-// TODO: findup and config file
 // TODO: configure yaml location first time cli is run
 // TODO: confirm creation of blank todo when first run
 // TODO: add cli help
@@ -18,7 +18,7 @@ const todoFileName = "todo.yaml";
 let todoFilePath = await findUp(todoFileName);
 if (!todoFilePath) {
     try {
-        await writeFile("todo.yaml", "- This is an example todo");
+        await writeFile("todo.yaml", defaultTodoFile);
         todoFilePath = "todo.yaml";
     } catch (err) {
         console.log(`Whoops. Couldn't create todo.yaml: ${err}`);
@@ -31,6 +31,6 @@ inquirer.prompt([
     {
         name: "Todo List",
         type: "checkbox",
-        choices: todo
+        choices: todo.todo
     }
 ]);
