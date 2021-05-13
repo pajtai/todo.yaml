@@ -5,10 +5,10 @@
 ## Getting started
 
 ```shell
-npm i -g todo.yaml
+npx todo.yaml
 ```
 
-You can now run the "todo" or "todo.yaml" command globally.~~~~
+If you want to run "todo" or "todo.yaml" command globally, install globally with `npm i -g todo.yaml`.
 
 The command will execute on the todo.yaml in the current directory. If there is none, one will be created for you.
 
