@@ -69,6 +69,7 @@ async function showAndModifyTodoList () {
             },
         ]);
 
+    // Needed for the splice command to run from last to first
     const theAnswers = answers["Todo List"].sort((a,b) => {
         if (a > b) {
             return -1;
@@ -106,6 +107,11 @@ async function showAndModifyTodoList () {
 
     await writeFile(todoFilePath, YAML.stringify(todo));
     if (quit) {
+        console.clear();
+        console.log(chalk.green("Todo:"));
+        todo.todo.forEach(todo => {
+        console.log(`- ${todo}`);
+        });
         process.exit();
     }
     await showAndModifyTodoList();

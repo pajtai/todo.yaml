@@ -1,7 +1,8 @@
 todo:
-  - Configure to allow using a specific todo.yaml from anywhere
-  - Add cli help
   - Add configure command
+  - Add first time configuration
+  - Add option to have a single global todo.yaml (if not todo.yaml in dir)
+  - Add cli help
   - "Cli command: list todos and quit"
   - "Cli command: complete a todo and quit"
   - "Cli command: add a todo and quit"

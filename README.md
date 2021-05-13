@@ -4,23 +4,25 @@
 
 ## Getting started
 
+### Try it
 ```shell
 npx todo.yaml
 ```
 
-If you want to run a "todo" or "todo.yaml" command globally, install globally with `npm i -g todo.yaml`.
+### Install it
+```shell
+npm i -g todo.yaml
+```
+
+Now you can run a "todo" or "todo.yaml" command globally, install globally with `npm i -g todo.yaml`.
 
 The command will execute on the todo.yaml in the current directory. If there is none, one will be created for you.
 
 You can have as many todo.yaml files as you want. Each tracks todos based on a todo array. Each is configured within the file itself.
 
-### Commands
-
 ### Features
 
 Out of the box todo.yaml is a simple First-In, First-Out queue of plain text todos.
-
-For each `todo.yaml` file, you can configure additional features using: `todo configure`.
 
 ## Dev Workflow
 
