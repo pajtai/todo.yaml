@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-import { readFile, writeFile } from "fs/promises";
+import { access, readFile, writeFile } from "fs/promises";
 import defaultTodoFile from "./src/default-todo.js";
 import findUp from "find-up";
 import YAML from "yaml";
@@ -7,17 +7,17 @@ import inquirer from "inquirer";
 import chalk from "chalk";
 
 const todoFileName = "todo.yaml";
-// TODO: configure yaml location first time cli is run
-// TODO: confirm creation of blank todo when first run
-// TODO: add cli help
-// TODO: show options to list all todos or to configure
-// TODO: interactively add  a todo
-// TODO: interactively complete add a todo
-// TODO: add custom command to quick list all todos
-// TODO: add custom command to complete a todo (dynamic numbering?)
 
-let todoFilePath = await findUp(todoFileName);
-if (!todoFilePath) {
+let todoFilePath = "todo.yaml";
+let fileExists = true;
+try {
+    console.log("try");
+    await access(todoFilePath);
+} catch {
+    console.log("no");
+    fileExists = false;
+}
+if (!fileExists) {
     try {
         const answers = await inquirer
             .prompt([
@@ -54,7 +54,11 @@ async function showAndModifyTodoList () {
     choices.push({
         name: `+ ` + chalk.green(`Add a todo`),
         value: `add todo`
-    })
+    });
+    choices.push({
+        name: `x ` + chalk.red(`Quit`),
+        value: `quit`
+    });
     const answers = await inquirer
         .prompt([
             {
@@ -64,23 +68,36 @@ async function showAndModifyTodoList () {
             }
         ]);
 
-    const answer = answers["Todo List"];
-    if (isNaN(answer)) {
-        console.log("add a todo!");
-        const answers = await inquirer
-            .prompt([
-                {
-                    name: "Task To Add",
-                    type: "input"
-                }
-            ]);
-        const todoItem = answers["Task To Add"];
-        todo.todo.push(todoItem);
-    } else {
-        todo.todo.splice(answer, 1);
+    const theAnswers = answers["Todo List"];
+    let quit = false;
+    for (const answer of theAnswers) {
+        if (isNaN(answer)) {
+            switch (answer) {
+                case "quit":
+                    quit = true;
+                    break;
+                default:
+                    const answers = await inquirer
+                        .prompt([
+                            {
+                                name: "Task To Add",
+                                type: "input"
+                            }
+                        ]);
+                    const todoItem = answers["Task To Add"];
+                    todo.todo.push(todoItem);
+                    break;
+            }
+        } else {
+            // thid doesn't work when multiple todos are selected to be completed
+            todo.todo.splice(answer, 1);
+        }
     }
 
     await writeFile(todoFilePath, YAML.stringify(todo));
+    if (quit) {
+        process.exit();
+    }
     await showAndModifyTodoList();
 }
 

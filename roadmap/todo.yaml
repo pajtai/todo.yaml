@@ -1,0 +1,19 @@
+todo:
+  - Fix delete command if multiple tasks are selected
+  - Configure to allow using a specific todo.yaml from anywhere
+  - Add cli help
+  - Add configure command
+  - "Cli command: list todos and quit"
+  - "Cli command: complete a todo and quit"
+  - "Cli command: add a todo and quit"
+  - Add ability to edit todos
+  - "Feature: gui"
+  - "Feature: importance"
+  - "Feature: priority"
+  - "Feature: due date"
+  - "Feature: tags"
+  - "Feature: subtasks"
+  - "Feature: reorder"
+  - Categories
+  - More lines should show
+configuration: {}

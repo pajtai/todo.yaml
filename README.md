@@ -2,18 +2,25 @@
 
 > A flexible, configurable, and file-based todo tracker.
 
-## Concepts
-- todo.yaml: You can have as many of these as you want. Each tracks todos based on a todo array. The configuration for that todo list lives in the same file under the configuration key
-
 ## Getting started
 
 ```shell
 npm i -g todo.yaml
 ```
 
-You can now run the "todo" command globally
+You can now run the "todo" or "todo.yaml" command globally.~~~~
 
-The command will execute on the nearest todo.yaml file found searching the current directory and each parent directory
+The command will execute on the todo.yaml in the current directory. If there is none, one will be created for you.
+
+You can have as many todo.yaml files as you want. Each tracks todos based on a todo array. Each is configured within the file itself.
+
+### Commands
+
+### Features
+
+Out of the box todo.yaml is a simple First-In, First-Out queue of plain text todos.
+
+For each `todo.yaml` file, you can configure additional features using: `todo configure`.
 
 ## Dev Workflow
 
