@@ -4,6 +4,11 @@ import inquirer from "inquirer";
 import { TODO_FILE_PATH } from "../constants.js";
 
 let fileExists = false;
+
+/**
+ * Ensure the todo file exists. Use a singleton variable to track whether file is created.
+ * @returns {Promise<void>}
+ */
 export async function ensureTodoYamlFile() {
     if (fileExists) {
         return;

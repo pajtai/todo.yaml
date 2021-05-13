@@ -9,12 +9,12 @@ import { getTodos } from "./file-io/todo-yaml-get.js";
 import {showItemsTodo} from "./todo-utils.js";
 
 await ensureTodoYamlFile();
-const todo = await getTodos();
+const todos = await getTodos();
 await showAndModifyTodoList();
 
 async function showAndModifyTodoList () {
     console.clear();
-    const choices = todo.todo.map((todo, index) => {
+    const choices = todos.todo.map((todo, index) => {
         return {
             name: todo,
             value: index
@@ -65,19 +65,19 @@ async function showAndModifyTodoList () {
                             }
                         ]);
                     const todoItem = answers["Task To Add"];
-                    todo.todo.push(todoItem);
+                    todos.todo.push(todoItem);
                     break;
             }
         } else {
             // thid doesn't work when multiple todos are selected to be completed
-            todo.todo.splice(answer, 1);
+            todos.todo.splice(answer, 1);
         }
     }
 
-    await writeFile(TODO_FILE_PATH, YAML.stringify(todo));
+    await writeFile(TODO_FILE_PATH, YAML.stringify(todos));
     if (quit) {
         console.clear();
-        showItemsTodo(todo);
+        showItemsTodo(todos);
         process.exit();
     }
     await showAndModifyTodoList();
