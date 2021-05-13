@@ -15,4 +15,13 @@ program
         showItemsTodo(todo);
     });
 
+program
+    .command("configure")
+    .alias("config")
+    .alias("c")
+    .description("Configure the current set of todos")
+    .action(() => {
+        console.log("configure");
+    });
+
 program.parse(process.argv);

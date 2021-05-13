@@ -1,12 +1,10 @@
 todo:
   - Add configure command
-  - Add first time configuration
   - Add option to have a single global todo.yaml (if not todo.yaml in dir)
-  - Add cli help
+  - Add ability to edit todos
   - "Cli command: list todos and quit"
   - "Cli command: complete a todo and quit"
   - "Cli command: add a todo and quit"
-  - Add ability to edit todos
   - "Feature: gui"
   - "Feature: importance"
   - "Feature: priority"
@@ -16,4 +14,5 @@ todo:
   - "Feature: reorder"
   - Categories
   - More lines should show
+  - Add first time configuration
 configuration: {}

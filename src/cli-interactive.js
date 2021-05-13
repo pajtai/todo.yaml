@@ -1,4 +1,5 @@
 import { writeFile } from "fs/promises";
+import { spawnSync } from "child_process";
 import chalk from "chalk";
 import inquirer from "inquirer";
 import YAML from "yaml";
@@ -25,18 +26,21 @@ async function showAndModifyTodoList () {
         value: `add todo`
     });
     choices.push({
-        name: `x ` + chalk.red(`Quit`),
-        value: `quit`
+        name: `x ` + chalk.red(`Exit`),
+        value: `exit`
     });
+
     const answers = await inquirer
         .prompt([
             {
                 name: "Todo List",
+                message: "Select the todos to complete, add a todo, or exit.\r\n",
                 type: "checkbox",
                 choices,
-                pageSize: choices.length + 2,
+                pageSize: process.stdout.rows - 4
             },
         ]);
+
 
     // Needed for the splice command to run from last to first
     const theAnswers = answers["Todo List"].sort((a,b) => {
@@ -53,7 +57,7 @@ async function showAndModifyTodoList () {
     for (const answer of theAnswers) {
         if (isNaN(answer)) {
             switch (answer) {
-                case "quit":
+                case "exit":
                     quit = true;
                     break;
                 default:
