@@ -64,11 +64,21 @@ async function showAndModifyTodoList () {
             {
                 name: "Todo List",
                 type: "checkbox",
-                choices
-            }
+                choices,
+                pageSize: choices.length + 2,
+            },
         ]);
 
-    const theAnswers = answers["Todo List"];
+    const theAnswers = answers["Todo List"].sort((a,b) => {
+        if (a > b) {
+            return -1;
+        }
+        if (a < b) {
+            return 1;
+        }
+
+        return 0;
+    });
     let quit = false;
     for (const answer of theAnswers) {
         if (isNaN(answer)) {

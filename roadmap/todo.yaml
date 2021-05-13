@@ -1,5 +1,4 @@
 todo:
-  - Fix delete command if multiple tasks are selected
   - Configure to allow using a specific todo.yaml from anywhere
   - Add cli help
   - Add configure command
