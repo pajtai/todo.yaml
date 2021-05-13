@@ -4,10 +4,12 @@ import inquirer from "inquirer";
 import YAML from "yaml";
 import { TODO_FILE_PATH } from "./constants.js";
 
-import("./file-io/todo-yaml-ensure.js");
-import { todo } from "./file-io/todo-yaml-get.js";
+import {ensureTodoYamlFile} from "./file-io/todo-yaml-ensure.js"
+import { getTodos } from "./file-io/todo-yaml-get.js";
 import {showItemsTodo} from "./todo-utils.js";
 
+await ensureTodoYamlFile();
+const todo = await getTodos();
 await showAndModifyTodoList();
 
 async function showAndModifyTodoList () {
