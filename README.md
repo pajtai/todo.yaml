@@ -22,7 +22,20 @@ You can have as many todo.yaml files as you want. Each tracks todos based on a t
 
 ### Features
 
-Out of the box todo.yaml is a simple First-In, First-Out queue of plain text todos.
+Out of the box todo.yaml is a simple queue of plain text todos you can add to or remove from.
+
+## API
+
+| Command | Description |
+| --- | --- |
+| todo | Run the todo CLI in an interactive manner. No need to memorize any arguments |
+| todo.yaml | Alias for todo |
+| todo list | List all current todos |
+| todo ls | Alias for todo list |
+| todo help | Show help for running commands with command line arguments |
+| todo -h | Alias for todo help |
+| todo --help | Alias for todo help |
+
 
 ## Dev Workflow
 
