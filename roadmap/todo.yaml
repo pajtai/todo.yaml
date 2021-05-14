@@ -1,19 +1,11 @@
 todo:
-  - Create gui
-  - Add configure command
-  - Add option to have a single global todo.yaml (if not todo.yaml in dir)
+  - Add todo via GUI
+  - Complete todo via GUI
+  - Reorder items
   - Add ability to edit todos
-  - "Cli command: list todos and quit"
-  - "Cli command: complete a todo and quit"
-  - "Cli command: add a todo and quit"
-  - "Feature: gui"
-  - "Feature: importance"
-  - "Feature: priority"
-  - "Feature: due date"
-  - "Feature: tags"
-  - "Feature: subtasks"
-  - "Feature: reorder"
-  - Categories
-  - More lines should show
-  - Add first time configuration
+  - Add optional type, due date, priority, project, completed columns
+  - Add configuration options that save to todo.yaml
+  - Add option to have a single global todo.yaml (if not todo.yaml in dir)
+  - Tags
+  - Subtasks
 configuration: {}
