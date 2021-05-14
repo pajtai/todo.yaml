@@ -1,8 +1,26 @@
-# todo.yaml
+# todo.yaml - PRE ALPHA
 
 > A flexible, configurable, and file-based todo tracker.
 
-A GUI for your todo.yaml
+A GUI for your todo.yaml.
+
+Currently this just lists todos stored in a todo.yaml. The todo.yaml has to have the form:
+
+```yaml
+todo:
+  - item 1
+  - item 2
+```
+
+Roadmap:
+- ~~Create GUI scaffold~~
+- ~~Auto create todo.yaml~~
+- ~~List todos in todo.yaml file~~
+- Add todo via GUI
+- Complete todo via GUI
+- Reorder items
+- Add optional type, due date, priority, project, completed columns
+- Add configuration options that save to todo.yaml
 
 ## Getting started
 
