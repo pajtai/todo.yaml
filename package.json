@@ -5,12 +5,13 @@
   "main": "cli.js",
   "type": "module",
   "bin": {
-    "todo": "./cli.js",
-    "todo.yaml": "./cli.js"
+    "todo": "./api/index.js",
+    "todo.yaml": "./api/index.js"
   },
   "scripts": {
     "start": "todo",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "concurrently 'nodemon ./api/index.js' 'cd app && npm run serve' 'sleep 3 && open http://localhost:8080/'"
   },
   "repository": {
     "type": "git",
@@ -29,9 +30,11 @@
   "homepage": "https://github.com/pajtai/todo.yaml#readme",
   "dependencies": {
     "chalk": "^4.1.1",
-    "commander": "^7.2.0",
-    "find-up": "^5.0.0",
-    "inquirer": "^8.0.0",
+    "express": "^4.17.1",
     "yaml": "^1.10.2"
+  },
+  "devDependencies": {
+    "concurrently": "^6.1.0",
+    "nodemon": "^2.0.7"
   }
 }

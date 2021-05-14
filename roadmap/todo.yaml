@@ -1,4 +1,5 @@
 todo:
+  - Create gui
   - Add configure command
   - Add option to have a single global todo.yaml (if not todo.yaml in dir)
   - Add ability to edit todos
