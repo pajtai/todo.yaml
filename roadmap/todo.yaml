@@ -1,11 +1,32 @@
 todo:
-  - Add todo via GUI
-  - Complete todo via GUI
-  - Reorder items
-  - Add ability to edit todos
-  - Add optional type, due date, priority, project, completed columns
-  - Add configuration options that save to todo.yaml
-  - Add option to have a single global todo.yaml (if not todo.yaml in dir)
-  - Tags
-  - Subtasks
+  - title: Add todo via GUI
+    done: false
+  - title: Complete todo via GUI
+    done: false
+  - title: Reorder items
+    done: false
+  - title: Add ability to edit todos
+    done: false
+  - title: Add optional type, due date, priority, project, completed columns
+    done: false
+  - title: Add configuration options that save to todo.yaml
+    done: false
+  - title: Add option to have a single global todo.yaml (if not todo.yaml in dir)
+    done: false
+  - title: Tags
+    done: false
+  - title: Subtasks
+    done: false
+  - title: Tips and Tricks
+    done: false
+  - title: Path to todo.yaml at bottom of screen
+    done: false
+  - title: Full width input
+    done: false
+  - title: Drag and drop reorder via
+      https://sortablejs.github.io/Vue.Draggable/#/simple
+    done: false
+  - title: X to close browser and turn off server
+    done: false
 configuration: {}
+done: []
