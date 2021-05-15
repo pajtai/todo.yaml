@@ -17,6 +17,10 @@ body {
   /*text-align: center;*/
   color: #2c3e50;
 }
+.home {
+  background-color: #FFF;
+  padding-bottom: 1rem;
+}
 section {
   padding: 1rem;
 }
@@ -31,8 +35,7 @@ li {
   background-color: #FFF;
   margin: 1rem;
   padding: 0.5rem;
-  border-radius: 0.5rem;
-  border: 1px solid #ABABAB;
+  border-bottom: 1px solid #ABABAB;
 }
 
 #nav {
