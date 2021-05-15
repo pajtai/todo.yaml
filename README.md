@@ -1,4 +1,4 @@
-# todo.yaml - PRE ALPHA
+# todo.yaml
 
 > A flexible, configurable, and file-based todo tracker.
 
