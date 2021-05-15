@@ -8,17 +8,9 @@ A GUI for your todo.yaml file.
 
 If you have a todo.yaml, you can already edit it in your favorite editor, but gratuitous GUIs are always nice. 
 
-## Format 
-
-The todo.yaml should have the form:
-
-```yaml
-todo:
-  - item 1
-  - item 2
-```
-
 ## Getting started
+
+CD into the directory that has your `todo.yaml` file. If there is not `todo.yaml` in the directory, one will be created for you.
 
 ### Try it
 ```shell
@@ -30,10 +22,19 @@ npx todo.yaml
 npm i -g todo.yaml
 ```
 
+## Format
+
+The todo.yaml should have the form:
+
+```yaml
+todo:
+  - item 1
+  - item 2
+```
+
 ## Dev Workflow
 
 ```shell
-git clone
-npm link
-# now you can test by running "todo"
+git clone git@github.com:pajtai/todo.yaml.git
+npm run dev
 ```
