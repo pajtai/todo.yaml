@@ -13,8 +13,6 @@ export async function putTodos(todosArray) {
     todos.todo = todosArray.filter(todo => !todo.done);
     todos.done = todos.done || [];
     todos.done = [...todos.done, ...todosArray.filter(todo => !!todo.done)];
-    console.log(todosArray);
-    console.log(todos);
     await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
 }
 
