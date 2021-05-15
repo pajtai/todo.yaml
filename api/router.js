@@ -6,8 +6,6 @@ export const router = Router();
 
 router.get("/todo", async (req, res) => {
     const todos = await getTodos();
-    console.log("-----");
-    console.log(todos);
     res.json(todos.map(ensureTodoStructure));
 });
 
