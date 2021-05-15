@@ -1,21 +1,25 @@
 <template>
-  <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+<!--  <div id="nav">-->
+<!--    <router-link to="/">Home</router-link> |-->
+<!--    <router-link to="/about">About</router-link>-->
+<!--  </div>-->
   <router-view />
 </template>
 
 <style>
+body {
+  background-color: #F0FFFF;
+}
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /*text-align: center;*/
   color: #2c3e50;
-  background-color: #F0FFFF;
 }
-
+section {
+  padding: 1rem;
+}
 ul {
   list-style-type: none;
   padding: 0;

@@ -32,7 +32,7 @@ export async function ensureTodoYamlFile() {
                     }
                 ]);
             if (answers.Confirm) {
-                await writeFile("todo.yaml", defaultTodoFile);
+                await writeFile([CWD, TODO_FILE_NAME].join(sep), defaultTodoFile);
             } else {
                 console.log("Please go to the directory you want your todo.yaml, and try again.");
                 process.exit();
