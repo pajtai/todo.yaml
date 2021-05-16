@@ -6,7 +6,7 @@
   <ul>
     <draggable v-model="todos" item-key="title" @change="save" :sort="true">
       <template #item="{element}">
-        <li v-if="!element.done">
+        <li>
           <input v-model="element.done" type="checkbox">
           {{ element.title }}
         </li>
@@ -49,6 +49,13 @@ export default {
     },
     save() {
       this.axios.post("/api/todo/", this.todos);
+      let i = this.todos.length;
+      while (--i > -1) {
+        let todo = this.todos[i];
+        if (todo.done) {
+          this.todos.splice(i, 1);
+        }
+      }
     },
   }
 };

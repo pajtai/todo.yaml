@@ -20,5 +20,7 @@ app.use("/api", router);
 app.listen(port, () => {
     const url = `http://localhost:${port}`;
     console.log(`App listening at ${url}`);
-    open(url);
+    if (process.env.THE_ENV !== "dev") {
+        open(url);
+    }
 });
