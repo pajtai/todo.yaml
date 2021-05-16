@@ -1,5 +1,5 @@
 import { access, writeFile } from "fs/promises";
-import defaultTodoFile from "../default-todo.js";
+import YAML from "yaml";
 import inquirer from "inquirer";
 import { CWD, TODO_FILE_NAME } from "../constants.js";
 import { sep } from "path";
@@ -22,7 +22,7 @@ export async function ensureTodoYamlFile() {
     }
     if (!fileExists) {
         try {
-            const answers = await inquirer
+            let answers = await inquirer
                 .prompt([
                     {
                         name: "Confirm",
@@ -32,7 +32,28 @@ export async function ensureTodoYamlFile() {
                     }
                 ]);
             if (answers.Confirm) {
-                await writeFile([CWD, TODO_FILE_NAME].join(sep), defaultTodoFile);
+                const SAVE_COMPLETED_TODOS = "Save completed todos";
+                answers = await inquirer
+                    .prompt([
+                        {
+                            name: "Configure",
+                            type: "checkbox",
+                            message: "Configure how todo.yaml behaves. Check the choices you want to enable.",
+                            choices: [
+                                 SAVE_COMPLETED_TODOS
+                            ]
+                        }
+                    ]);
+                const saveTodos = answers.Configure.includes(SAVE_COMPLETED_TODOS);
+                let todos = {
+                    todo: [
+                        "This is an example todo"
+                    ],
+                    configuration: {
+                        saveTodos
+                    }
+                }
+                await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
             } else {
                 console.log("Please go to the directory you want your todo.yaml, and try again.");
                 process.exit();

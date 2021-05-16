@@ -12,6 +12,9 @@ If you have a todo.yaml, you can already edit it in your favorite editor, but gr
 
 CD into the directory that has your `todo.yaml` file. If there is not `todo.yaml` in the directory, one will be created for you.
 
+## Configurations
+- Option to save completed todos
+
 ### Try it
 ```shell
 npx todo.yaml
