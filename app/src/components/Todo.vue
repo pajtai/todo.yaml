@@ -4,11 +4,14 @@
     <input v-model="newTodo" @keyup.enter="addTodo" type="text">
   </section>
   <ul>
-    <draggable v-model="todos" item-key="title" @change="save" :sort="true">
+    <draggable v-model="todos" item-key="key" @change="save" :sort="true">
       <template #item="{element}">
         <li>
-          <input v-model="element.done" type="checkbox">
-          {{ element.title }}
+          <div v-if="!element.editing" @dblclick="edit(element)">
+            <input v-model="element.done" type="checkbox">
+            {{ element.title }}
+          </div>
+          <input v-else v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
         </li>
       </template>
     </draggable>
@@ -30,7 +33,11 @@ export default {
   },
   async created() {
     const response = await this.axios.get("/api/todo/");
-    this.todos = response.data;
+    this.todos = response.data.map((todo, index) => {
+      todo.key = index;
+      todo.editing = false;
+      return todo;
+    });
     this.saveChanges = true;
   },
   watch: {
@@ -67,6 +74,12 @@ export default {
         }
       }
     },
+    edit(todo) {
+      todo.editing = true;
+    },
+    doneEdit(todo) {
+      todo.editing = false;
+    }
   }
 };
 

@@ -58,6 +58,9 @@ done:
 * When editing the todo.yaml by hand, you can add in new todo items as strings. They will automatically be turned into objects the next time the api interacts with them.
 * You can edit the configuration file interactively via `todo configure` or manually in your todo.yaml
 
+### GUI Editing
+* Double click to edit a todo title.
+
 ### Syncing
 * You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile. 
 
