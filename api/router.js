@@ -1,6 +1,6 @@
 import { Router } from "express";
-import {getTodos} from "./file-io/todo-yaml-get.js";
-import {putTodos} from "./file-io/todo-yaml-put.js";
+import {getTodos} from "../file-io/todo-yaml-get.js";
+import {putTodos} from "../file-io/todo-yaml-put.js";
 
 export const router = Router();
 

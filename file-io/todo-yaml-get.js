@@ -1,6 +1,6 @@
 import { readFile } from "fs/promises";
 import { sep } from "path";
-import { CWD, TODO_FILE_NAME } from "../constants.js";
+import { CWD, TODO_FILE_NAME } from "../api/constants.js";
 import YAML from "yaml";
 
 /**
@@ -13,3 +13,7 @@ export async function getTodos() {
     return todos.todo || [];
 }
 
+export async function getEntireTodosObject() {
+    const todoFile = await readFile([CWD, TODO_FILE_NAME].join(sep), "utf-8");
+    return YAML.parse(todoFile);
+}

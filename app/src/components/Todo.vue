@@ -31,12 +31,18 @@ export default {
   async created() {
     const response = await this.axios.get("/api/todo/");
     this.todos = response.data;
+    this.saveChanges = true;
   },
   watch: {
     todos: {
       handler() {
-        this.save();
-        console.log("saved");
+        if (!this.saveChanges) {
+          console.log("skip save");
+          this.saveChanges = true;
+        } else {
+          this.save();
+          console.log("saved");
+        }
       },
       deep: true
     },
@@ -45,14 +51,18 @@ export default {
     addTodo() {
       this.todos.push(createTodo(this.newTodo));
       this.newTodo = "";
-      this.save();
     },
     save() {
+      // this will save any just completed todos
       this.axios.post("/api/todo/", this.todos);
       let i = this.todos.length;
+
       while (--i > -1) {
         let todo = this.todos[i];
         if (todo.done) {
+          // no need to save anything while we remove done todos
+          this.saveChanges = false;
+          // this will remove any just completed todos
           this.todos.splice(i, 1);
         }
       }

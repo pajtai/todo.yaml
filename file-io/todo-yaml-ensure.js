@@ -1,8 +1,9 @@
 import { access, writeFile } from "fs/promises";
 import YAML from "yaml";
 import inquirer from "inquirer";
-import { CWD, TODO_FILE_NAME } from "../constants.js";
+import { CWD, TODO_FILE_NAME } from "../api/constants.js";
 import { sep } from "path";
+import {configure} from "../cli/configure.js";
 
 let fileExists = false;
 
@@ -32,26 +33,13 @@ export async function ensureTodoYamlFile() {
                     }
                 ]);
             if (answers.Confirm) {
-                const SAVE_COMPLETED_TODOS = "Save completed todos";
-                answers = await inquirer
-                    .prompt([
-                        {
-                            name: "Configure",
-                            type: "checkbox",
-                            message: "Configure how todo.yaml behaves. Check the choices you want to enable.",
-                            choices: [
-                                 SAVE_COMPLETED_TODOS
-                            ]
-                        }
-                    ]);
-                const saveTodos = answers.Configure.includes(SAVE_COMPLETED_TODOS);
+                const configuration = {};
+
                 let todos = {
                     todo: [
                         "This is an example todo"
                     ],
-                    configuration: {
-                        saveTodos
-                    }
+                    configuration: await configure(configuration)
                 }
                 await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
             } else {
