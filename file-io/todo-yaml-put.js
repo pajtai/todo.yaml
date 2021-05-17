@@ -1,6 +1,6 @@
 import {readFile, writeFile} from "fs/promises";
 import { sep } from "path";
-import { CWD, TODO_FILE_NAME } from "../api/constants.js";
+import { CWD, TODO_FILE_NAME } from "../constants.js";
 import YAML from "yaml";
 
 let fileLocked = false;

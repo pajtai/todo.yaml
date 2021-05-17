@@ -1,17 +1,21 @@
-import { access, writeFile } from "fs/promises";
+import {access, readFile, writeFile} from "fs/promises";
 import YAML from "yaml";
 import inquirer from "inquirer";
-import { CWD, TODO_FILE_NAME } from "../api/constants.js";
+import { CWD, TODO_FILE_NAME } from "../constants.js";
 import { sep } from "path";
 import {configure} from "../cli/configure.js";
 
 let fileExists = false;
 
+export async function ensureAndGetTodos() {
+    await ensureTodoYamlFile();
+    return await getTodos();
+}
 /**
  * Ensure the todo file exists. Use a singleton variable to track whether file is created.
  * @returns {Promise<void>}
  */
-export async function ensureTodoYamlFile() {
+async function ensureTodoYamlFile() {
     if (fileExists) {
         return;
     }
@@ -50,5 +54,10 @@ export async function ensureTodoYamlFile() {
             console.log(`Whoops. Couldn't create todo.yaml: ${err}`);
         }
     }
+}
+
+async function getTodos() {
+    const todoFile = await readFile([CWD, TODO_FILE_NAME].join(sep), "utf-8");
+    return YAML.parse(todoFile);
 }
 

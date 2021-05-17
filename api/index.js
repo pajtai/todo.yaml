@@ -2,12 +2,12 @@ import { dirname, sep } from 'path';
 import { fileURLToPath } from 'url';
 import open from "open";
 import { router } from "./router.js";
-import { ensureTodoYamlFile } from "../file-io/todo-yaml-ensure.js";
+import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 import express from 'express';
 
-await ensureTodoYamlFile();
+await ensureAndGetTodos();
 
 const app = express();
 const port = 3000;
@@ -16,10 +16,10 @@ app.use(express.json());
 app.use(express.static([__dirname,"..", "app", "dist"].join(sep)));
 
 app.use("/api", router);
-app.listen(port, () => {
+app.listen(port, async () => {
     const url = `http://0.0.0.0:${port}`;
     console.log(`App listening at ${url}`);
     if (process.env.THE_ENV !== "dev") {
-        open(url);
+        await open(url);
     }
 });

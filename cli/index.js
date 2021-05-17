@@ -1,9 +1,8 @@
 import { Command } from "commander";
 import { configure } from "./configure.js";
-import {getEntireTodosObject} from "../file-io/todo-yaml-get.js";
-import {ensureTodoYamlFile} from "../file-io/todo-yaml-ensure.js";
+import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 import {writeFile} from "fs/promises";
-import {CWD, TODO_FILE_NAME} from "../api/constants.js";
+import {CWD, TODO_FILE_NAME} from "../constants.js";
 import {sep} from "path";
 import YAML from "yaml";
 
@@ -14,9 +13,7 @@ program
     .alias("c")
     .description("Configure todo.yaml")
     .action(async () => {
-        await ensureTodoYamlFile();
-        let todos = await getEntireTodosObject();
-        console.log(todos);
+        let todos = await ensureAndGetTodos();
         todos.configuration = await configure(todos.configuration);
         await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
     });

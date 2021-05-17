@@ -1,12 +1,12 @@
 import { Router } from "express";
-import {getTodos} from "../file-io/todo-yaml-get.js";
 import {putTodos} from "../file-io/todo-yaml-put.js";
+import {ensureAndGetTodos} from "../file-io/todo-yaml-ensure-get.js";
 
 export const router = Router();
 
 router.get("/todo", async (req, res) => {
-    const todos = await getTodos();
-    res.json(todos.map(ensureTodoStructure));
+    const todos = await ensureAndGetTodos();
+    res.json(todos.todo.map(ensureTodoStructure));
 });
 
 router.post("/todo", async (req, res) => {
