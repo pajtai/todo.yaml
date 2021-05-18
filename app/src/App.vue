@@ -4,8 +4,25 @@
 <!--    <router-link to="/about">About</router-link>-->
 <!--  </div>-->
   <router-view />
+  <footer>
+    <small>Editing: {{path}}</small>
+  </footer>
 </template>
 
+<script>
+export default {
+  name: "App",
+  data() {
+    return {
+      path: ""
+    }
+  },
+  async created() {
+    const response = await this.axios.get("/api/file/");
+    this.path = response.data.filePath;
+  }
+}
+</script>
 <style>
 body {
   background-color: #F0FFFF;
@@ -49,5 +66,10 @@ li {
 
 #nav a.router-link-exact-active {
   color: #42b983;
+}
+
+footer {
+  color: #ABABAB;
+  font-size: 0.6rem;
 }
 </style>

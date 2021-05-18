@@ -17,14 +17,13 @@ export async function configure(configuration) {
             }
         ]);
     configuration.saveCompleted = answers.saveCompleted.includes(SAVE_COMPLETED_TODOS);
-    return configuration;
 
     const columns = [
         {name: "Due Date", value: "dueDate"},
-        {name: "Type", value: "type"},
-        {name: "Context", value: "context"},
-        {name: "Project", value: "project"},
-        {name: "Importance", value: "importance"}
+        // {name: "Type", value: "type"},
+        // {name: "Context", value: "context"},
+        // {name: "Project", value: "project"},
+        // {name: "Importance", value: "importance"}
     ];
     defaults = columns.filter(column => {
             if (configuration.columns && configuration.columns[column.value]) {
