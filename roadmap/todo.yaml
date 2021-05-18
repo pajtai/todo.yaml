@@ -1,10 +1,4 @@
 todo:
-  - title: Fix, "putTodos attempt while file locked" when reordering
-    done: false
-  - title: remove "key" and "editing" from saved todos
-    done: false
-  - title: 'remove, "done: true" from done todos'
-    done: false
   - title: option to add todos at top or bottom
     done: false
   - title: Add function to delete a todo
@@ -15,28 +9,18 @@ todo:
     done: false
   - title: Tags
     done: false
-    key: 7
-    editing: false
   - title: Subtasks
     done: false
-    key: 8
-    editing: false
   - title: Full width input
     done: false
-    key: 11
-    editing: false
   - title: X to close browser and turn off server
     done: false
-    key: 13
-    editing: false
   - title: Add optional priority
     done: false
   - title: Add optional project
     done: false
 configuration:
   saveCompleted: true
-  columns:
-    dueDate: false
 done:
   - title: Add todo via GUI
   - title: Complete todo via GUI
@@ -47,3 +31,6 @@ done:
   - title: Path to todo.yaml at bottom of screen
   - title: Drag and drop reorder via
       https://sortablejs.github.io/Vue.Draggable/#/simple
+  - title: Fix, "putTodos attempt while file locked" when reordering
+  - title: remove "key" and "editing" from saved todos
+  - title: 'remove, "done: true" from done todos'

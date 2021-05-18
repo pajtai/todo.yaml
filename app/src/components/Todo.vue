@@ -4,7 +4,7 @@
     <input v-model="newTodo" @keyup.enter="addTodo" type="text">
   </section>
   <ul>
-    <draggable v-model="todos" item-key="key" @change="save" :sort="true">
+    <draggable v-model="todos" item-key="key" :sort="true">
       <template #item="{element}">
         <li>
           <div v-if="!element.editing" @dblclick="edit(element)">
