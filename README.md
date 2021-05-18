@@ -10,7 +10,7 @@ If you have a todo.yaml, you can already edit it in your favorite editor, but gr
 
 ## Getting started
 
-CD into the directory that has your `todo.yaml` file. If there is not `todo.yaml` in the directory, one will be created for you.
+CD into the directory that has your `todo.yaml` file. If there is no `todo.yaml` in the directory, one will be created for you.
 
 You can configure your todo.yaml when the file is created, and you can configure it later by running `todo configure`. The configuration lives in the todo.yaml file itself under the `configuration` key/
 
@@ -85,3 +85,7 @@ Some people say it's a good idea to write down ALL your todos, since there is a 
 Don't be afraid to delete todos.
 
 I think people have a built-in aversion to loss and missing out. This causes our todos to accumulate more and more items until the important items are flooded by the trivial items. It's a good idea to delete old todos that you're not going to do.
+
+## Roadmap
+
+Obviously, it's a [`todo.yaml`](roadmap/todo.yaml)!

@@ -19,6 +19,8 @@ todo:
     done: false
   - title: Add optional project
     done: false
+  - title: 'Remove "done: false" from todo... it is redundant'
+  - titie: Add configuration as a hover over file being edited
 configuration:
   saveCompleted: true
 done:
