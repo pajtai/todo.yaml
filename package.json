@@ -1,6 +1,6 @@
 {
   "name": "todo.yaml",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "description": "A flexible, configurable, and file-based todo tracker.",
   "main": "cli.js",
   "type": "module",
