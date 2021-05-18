@@ -19,7 +19,7 @@ export async function putTodos(todosArray) {
     todos.todo = todosArray.filter(todo => !todo.done);
     if (todos.configuration.saveCompleted) {
         todos.done = todos.done || [];
-        const done = todosArray.filter(todo => !!todo.done);
+        const done = todosArray.filter(todo => !!todo.done).map(todo => { delete todo.done; return todo; });
         if (done) {
             todos.done = todos.done.concat(done);
         }
