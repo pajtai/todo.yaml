@@ -17,7 +17,7 @@ export async function configure(configuration) {
             }
         ]);
     configuration.saveCompleted = answers.saveCompleted.includes(SAVE_COMPLETED_TODOS);
-
+    return;
     const columns = [
         {name: "Due Date", value: "dueDate"},
         // {name: "Type", value: "type"},
