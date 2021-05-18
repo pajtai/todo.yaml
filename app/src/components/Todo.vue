@@ -61,7 +61,12 @@ export default {
     },
     save() {
       // this will save any just completed todos
-      this.axios.post("/api/todo/", this.todos);
+      this.axios.post("/api/todo/", this.todos.map(todo => {
+        return {
+          title: todo.title,
+          done: todo.done
+        }
+      }));
       let i = this.todos.length;
 
       while (--i > -1) {

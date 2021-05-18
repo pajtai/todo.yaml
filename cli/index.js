@@ -14,7 +14,7 @@ program
     .description("Configure todo.yaml")
     .action(async () => {
         let todos = await ensureAndGetTodos();
-        todos.configuration = await configure(todos.configuration);
+        todos.configuration = await configure(todos.configuration || {});
         await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
     });
 

@@ -73,3 +73,15 @@ done:
 git clone git@github.com:pajtai/todo.yaml.git
 npm run dev
 ```
+
+## TODO Suggestions
+
+It's your `todo.yaml` file, so, obviously, do as you wish, but I've noticed the following:
+
+Track only important todos. The other items take care of themselves.
+
+Some people say it's a good idea to write down ALL your todos, since there is a cost to keeping them in your head. The flip side of this is that writing a todo down gives it a life of its own. If you write down all your todos, the trivial ones will flood the important ones. It's probably better to only track certain todos.
+
+Don't be afraid to delete todos.
+
+I think people have a built-in aversion to loss and missing out. This causes our todos to accumulate more and more items until the important items are flooded by the trivial items. It's a good idea to delete old todos that you're not going to do.
