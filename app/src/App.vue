@@ -70,6 +70,6 @@ li {
 
 footer {
   color: #ABABAB;
-  font-size: 0.6rem;
+  font-size: 1rem;
 }
 </style>
