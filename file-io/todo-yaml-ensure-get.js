@@ -32,7 +32,7 @@ async function ensureTodoYamlFile() {
                     {
                         name: "Confirm",
                         type: "confirm",
-                        message: "todo.yaml not found. Create a todo.yaml in this directory?",
+                        message: `${TODO_FILE_NAME} not found. Create a ${TODO_FILE_NAME} in this directory?`,
                         default: false
                     }
                 ]);

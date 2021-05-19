@@ -1,4 +1,5 @@
 todo:
+  - title: Newly added todos should have dueDate if required
   - title: option to add todos at top or bottom
   - title: option to delete due date
   - title: Add function to delete a todo
