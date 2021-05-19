@@ -14,8 +14,8 @@
           <div v-else>
             <input v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
           </div>
-          <div>
-            <datepicker/>
+          <div v-if="Object.keys(element).includes('dueDate')">
+            <datepicker :placeholder="`No Due Date`" v-model="element.dueDate"/>
           </div>
         </li>
       </template>
@@ -44,6 +44,9 @@ export default {
     this.todos = response.data.map((todo, index) => {
       todo._key = index;
       todo._editing = false;
+      if (todo.dueDate) {
+        todo.dueDate = new Date(todo.dueDate);
+      }
       return todo;
     });
     this.saveChanges = true;
@@ -75,6 +78,9 @@ export default {
         delete copy._key;
         if (!copy.done) {
           delete copy.done;
+        }
+        if (copy.dueDate) {
+          copy.dueDate = copy.dueDate.toISOString();
         }
         return copy;
       }));
@@ -112,5 +118,9 @@ li {
 }
 li > div {
   flex: 1;
+}
+.v3dp__datepicker > input {
+  border: none;
+  cursor: pointer;
 }
 </style>

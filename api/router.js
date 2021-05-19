@@ -8,7 +8,7 @@ export const router = Router();
 
 router.get("/todo", async (req, res) => {
     const todos = await ensureAndGetTodos();
-    res.json(todos.todo.map(ensureTodoStructure));
+    res.json(todos.todo.map(ensureTodoStructure(todos.configuration)));
 });
 
 router.post("/todo", async (req, res) => {
@@ -22,13 +22,21 @@ router.get("/file", (req, res) => {
     });
 });
 
-function ensureTodoStructure(todo) {
-    if (typeof todo === "string") {
-        return {
-            title: todo,
-            done: false
+function ensureTodoStructure(configuration) {
+    configuration.columns = configuration.columns || {};
+    return (todo) => {
+        if (typeof todo === "string") {
+            return {
+                title: todo
+            }
         }
-    } else {
+
+        if (configuration.columns.dueDate) {
+            todo.dueDate = todo.dueDate || null;
+        } else {
+            delete todo.dueDate;
+        }
+
         return todo;
-    }
+    };
 }

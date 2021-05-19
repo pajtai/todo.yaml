@@ -25,7 +25,10 @@ You can configure your todo.yaml when the file is created, and you can configure
 | todo c | alias for todo configure |
 
 ## Configuration
-- Option to save completed todos
+To configure your `todo.yaml`, run `todo configure`.
+
+- `saveCompleted` Option to save completed todos
+- `columns: dueDate` Option to track due dates
 
 ### Try it
 ```shell

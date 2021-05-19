@@ -1,27 +1,20 @@
 todo:
   - title: option to add todos at top or bottom
-    done: false
+  - title: option to delete due date
   - title: Add function to delete a todo
-    done: false
-  - title: Add optional due date
-    done: false
   - title: Add optional type
-    done: false
   - title: Tags
-    done: false
   - title: Subtasks
-    done: false
   - title: Full width input
-    done: false
   - title: X to close browser and turn off server
-    done: false
   - title: Add optional priority
-    done: false
   - title: Add optional project
-    done: false
   - title: 'Remove "done: false" from todo... it is redundant'
+  - title: add optional date completed
 configuration:
   saveCompleted: true
+  columns:
+    dueDate: false
 done:
   - title: Add todo via GUI
   - title: Complete todo via GUI
@@ -35,3 +28,5 @@ done:
   - title: Fix, "putTodos attempt while file locked" when reordering
   - title: remove "key" and "editing" from saved todos
   - title: 'remove, "done: true" from done todos'
+  - title: Add optional due date
+    dueDate: null
