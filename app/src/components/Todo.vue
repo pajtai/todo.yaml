@@ -4,14 +4,19 @@
     <input v-model="newTodo" @keyup.enter="addTodo" type="text">
   </section>
   <ul>
-    <draggable v-model="todos" item-key="key" :sort="true">
+    <draggable v-model="todos" item-key="_key" :sort="true">
       <template #item="{element}">
         <li>
-          <div v-if="!element.editing" @dblclick="edit(element)">
+          <div v-if="!element._editing" @dblclick="edit(element)">
             <input v-model="element.done" type="checkbox">
             {{ element.title }}
           </div>
-          <input v-else v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
+          <div v-else>
+            <input v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
+          </div>
+          <div>
+            <datepicker/>
+          </div>
         </li>
       </template>
     </draggable>
@@ -20,22 +25,25 @@
 
 <script>
 import draggable from "vuedraggable";
+import datepicker from 'vue3-datepicker'
 export default {
   name: "Todo",
   components: {
     draggable,
+    datepicker
   },
   data() {
     return {
       newTodo: "",
-      todos: []
+      todos: [],
+      removeKeys: ["_key", "_editing"]
     }
   },
   async created() {
     const response = await this.axios.get("/api/todo/");
     this.todos = response.data.map((todo, index) => {
-      todo.key = index;
-      todo.editing = false;
+      todo._key = index;
+      todo._editing = false;
       return todo;
     });
     this.saveChanges = true;
@@ -62,10 +70,13 @@ export default {
     save() {
       // this will save any just completed todos
       this.axios.post("/api/todo/", this.todos.map(todo => {
-        return {
-          title: todo.title,
-          done: todo.done
+        let copy = Object.assign({}, todo);
+        delete copy._editing;
+        delete copy._key;
+        if (!copy.done) {
+          delete copy.done;
         }
+        return copy;
       }));
       let i = this.todos.length;
 
@@ -80,10 +91,10 @@ export default {
       }
     },
     edit(todo) {
-      todo.editing = true;
+      todo._editing = true;
     },
     doneEdit(todo) {
-      todo.editing = false;
+      todo._editing = false;
     }
   }
 };
@@ -95,3 +106,11 @@ function createTodo(title) {
   }
 }
 </script>
+<style>
+li {
+  display: flex;
+}
+li > div {
+  flex: 1;
+}
+</style>
