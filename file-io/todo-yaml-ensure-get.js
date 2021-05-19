@@ -33,7 +33,7 @@ async function ensureTodoYamlFile() {
                         name: "Confirm",
                         type: "confirm",
                         message: `${TODO_FILE_NAME} not found. Create a ${TODO_FILE_NAME} in this directory?`,
-                        default: false
+                        default: true
                     }
                 ]);
             if (answers.Confirm) {
