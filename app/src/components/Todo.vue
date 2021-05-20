@@ -1,7 +1,7 @@
 <template>
   <section>
-    <label>Add Todo:</label>
-    <input v-model="newTodo" @keyup.enter="addTodo" type="text">
+    <input class="add-todo__input" v-model="newTodo" @keyup.enter="addTodo" type="text">
+    <label class="add-todo__label">Add: </label>
   </section>
   <ul>
     <draggable v-model="todos" item-key="_key" :sort="true">
@@ -13,6 +13,11 @@
           </div>
           <div v-else>
             <input v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
+          </div>
+          <div v-if="Object.keys(element).includes('notes')" class="notes">
+            <span v-if="!element._editingNotes && element.notes" @dblclick="editNotes(element)">{{ element.notes }}</span>
+            <span class="todo__notes_empty" @dblclick="editNotes(element)" v-if="!element.notes && !element._editingNotes">Add Note</span>
+            <input v-if="element._editingNotes" v-model="element.notes" @keyup.enter="doneEditNotes(element)" type="text">
           </div>
           <div v-if="Object.keys(element).includes('dueDate')">
             <datepicker :placeholder="`No Due Date`" v-model="element.dueDate"/>
@@ -44,6 +49,7 @@ export default {
     this.todos = response.data.map((todo, index) => {
       todo._key = index;
       todo._editing = false;
+      todo._editingNotes = false;
       if (todo.dueDate) {
         todo.dueDate = new Date(todo.dueDate);
       }
@@ -67,14 +73,28 @@ export default {
   },
   methods: {
     addTodo() {
-      this.todos.push(createTodo(this.newTodo));
+      this.todos.push(this.createTodo(this.newTodo));
       this.newTodo = "";
+    },
+    createTodo(title) {
+      let newTodo = {};
+
+      if (this.todos.length) {
+        Object.keys(this.todos[0]).forEach(key => {
+          newTodo[key] = null;
+        });
+      }
+      return Object.assign(newTodo, {
+        title,
+        done: false
+      });
     },
     save() {
       // this will save any just completed todos
       this.axios.post("/api/todo/", this.todos.map(todo => {
         let copy = Object.assign({}, todo);
         delete copy._editing;
+        delete copy._editingNotes;
         delete copy._key;
         if (!copy.done) {
           delete copy.done;
@@ -101,23 +121,52 @@ export default {
     },
     doneEdit(todo) {
       todo._editing = false;
-    }
+    },
+    editNotes(todo) {
+      todo._editingNotes = true;
+    },
+    doneEditNotes(todo) {
+      todo._editingNotes = false;
+    },
   }
 };
 
-function createTodo(title) {
-  return {
-    title,
-    done: false
-  }
-}
 </script>
 <style>
+section {
+  padding: 1rem 0 0 2rem;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+li {
+  cursor: pointer;
+  text-align: left;
+  background-color: #FFF;
+  margin: 1rem;
+  padding: 0.5rem;
+  border-bottom: 1px solid #ABABAB;
+}
 li {
   display: flex;
 }
 li > div {
   flex: 1;
+}
+.add-todo__label {
+  float: left;
+  width: 3rem;
+  color: #AEAEAE;
+}
+.add-todo__input {
+  border: none;
+  border-bottom: 1px solid #AEAEAE;
+  width: calc(100% - 4rem);
+}
+.todo__notes_empty {
+  color: #AEAEAE;
 }
 .v3dp__datepicker > input {
   border: none;

@@ -37,6 +37,12 @@ function ensureTodoStructure(configuration) {
             delete todo.dueDate;
         }
 
+        if (configuration.columns.notes) {
+            todo.notes = todo.notes || "";
+        } else {
+            delete todo.notes;
+        }
+
         return todo;
     };
 }

@@ -38,22 +38,7 @@ body {
   background-color: #FFF;
   padding-bottom: 1rem;
 }
-section {
-  padding: 1rem;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-  margin: 0;
-}
-li {
-  cursor: pointer;
-  text-align: left;
-  background-color: #FFF;
-  margin: 1rem;
-  padding: 0.5rem;
-  border-bottom: 1px solid #ABABAB;
-}
+
 
 #nav {
   padding: 30px;

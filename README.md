@@ -30,6 +30,7 @@ To configure your `todo.yaml`, run `todo configure`.
 
 - `saveCompleted` Option to save completed todos
 - `columns: dueDate` Option to track due dates
+- `columns: notes` Option to add notes to items
 
 ### Try it
 ```shell
