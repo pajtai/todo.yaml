@@ -1,28 +1,33 @@
 todo:
-    - title: reorder via gui
-    - title: font size by priority
     - title: Add optional priority
+    - title: font size by priority
     - title: column labels on bottom
-    - title: custom columns
     - title: option to add todos at top or bottom
+    - title: Blur as cancel functionality for all columns not just title
+    - title: X to close browser and turn off server (auto shut off too)
+    - title: server running indicator
+    - title: reorder via gui
+    - title: option to filter by column value
+    - title: custom columns
     - title: option to delete due date
     - title: Add function to delete a todo
+    - title: '"send to top" "send to bottom"'
     - title: Add optional type
     - title: Tags
     - title: Subtasks
     - title: Full width input
-    - title: X to close browser and turn off server
     - title: Add optional project
     - title: 'Remove "done: false" from todo... it is redundant'
     - title: add optional date completed
     - title: list available yaml files in directory
     - title: prompt for yaml file when creating
     - title: note about disfluency
-    - title: '"send to top" "send to bottom"'
+    - title: Electron/PKG app?
 configuration:
     saveCompleted: true
     columns:
         dueDate: false
+        notes: false
 done:
     - title: Add todo via GUI
     - title: Complete todo via GUI
@@ -37,5 +42,4 @@ done:
     - title: remove "key" and "editing" from saved todos
     - title: 'remove, "done: true" from done todos'
     - title: Add optional due date
-      dueDate: null
     - title: Newly added todos should have dueDate if required

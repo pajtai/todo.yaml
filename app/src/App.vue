@@ -5,7 +5,10 @@
     <!--  </div>-->
     <router-view />
     <footer>
-        <small>Editing: {{ path }}</small>
+        <div>
+            <small>Editing: {{ path }}</small>
+        </div>
+        <div @click="close()" class="close">X</div>
     </footer>
 </template>
 
@@ -20,6 +23,16 @@ export default {
     async created() {
         const response = await this.axios.get("/api/file/");
         this.path = response.data.filePath;
+    },
+    methods: {
+        async close() {
+            const response = await this.axios.post("/api/shutdown", {
+                action: "shutdown",
+            });
+            if (response.status === 200) {
+                window.close();
+            }
+        },
     },
 };
 </script>
@@ -55,5 +68,12 @@ body {
 footer {
     color: #ababab;
     font-size: 1rem;
+}
+footer > div {
+    display: inline-block;
+}
+.close {
+    float: right;
+    cursor: pointer;
 }
 </style>

@@ -18,15 +18,17 @@ You can configure your todo.yaml when the file is created, and you can configure
 
 _Square brackets indicate an optional arguments._
 
-| Command                           | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
-| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `todo [file-name]`                | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, a choice of yaml files in the directory is given. If there are no yaml files in the directory, the name of the yaml file to be created can be entered. The file name must have a `.yaml` suffix. |
-| `todo.yaml`                       | Alias for todo                                                                                                                                                                                                                                                                                                                                                                                              |
-| `npx todo.yaml`                   | Runs todo without globally installing todo.yaml                                                                                                                                                                                                                                                                                                                                                             |
-| `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd                                                                                                                                                                                                                                                                                                                                                                          |
-| `todo c`                          | alias for todo configure`                                                                                                                                                                                                                                                                                                                                                                                   |
-| `todo --version`                  | Show the version`                                                                                                                                                                                                                                                                                                                                                                                           |
-| `todo -V`                         | alias for todo --version`                                                                                                                                                                                                                                                                                                                                                                                   |
+| Command | Description |
+| --- | --- |
+| `todo [file-name]` | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, a choice of yaml files in the directory is given. If there are no yaml files in the directory, the name of the yaml file to be created can be entered. The file name must have a `.yaml` suffix. |
+| `todo.yaml`                       | Alias for todo |
+| `npx todo.yaml`                   | Runs todo without globally installing todo.yaml |
+| `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd |
+| `todo c`                          | alias for todo configure` |
+| `todo --version`                  | Show the version` |
+| `todo -V`                         | alias for todo --version` |
+
+The "X" button in the lower right will close the window and shut down the server.
 
 ## Configuration
 
@@ -76,6 +78,8 @@ done:
 ### Syncing
 
 -   You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
+- Do you want to share you TODO with the world? `npx localtunnel --port 3000`
+
 
 ### Organization
 

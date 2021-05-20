@@ -22,6 +22,13 @@ router.get("/file", (req, res) => {
     });
 });
 
+router.post("/shutdown", (req, res) => {
+    if (req.body.action === "shutdown") {
+        res.status(200).send();
+        process.exit();
+    }
+});
+
 function ensureTodoStructure(configuration) {
     configuration.columns = configuration.columns || {};
     return (todo) => {
