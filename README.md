@@ -20,7 +20,7 @@ _Square brackets indicate an optional arguments._
 
 | Command | Description |
 | --- | --- |
-| `todo [file-name]` | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, the default is `todo.yaml`. The file name must have a `.yaml` suffix. |
+| `todo [file-name]` | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, a choice of yaml files in the directory is given. If there are no yaml files in the directory, the name of the yaml file to be created can be entered. The file name must have a `.yaml` suffix. |
 | `todo.yaml` | Alias for todo |
 | `npx todo.yaml` | Runs todo without globally installing todo.yaml
 | `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd |
