@@ -6,7 +6,7 @@ A GUI for your todo.yaml file.
 
 ## Why?
 
-If you have a todo.yaml, you can already edit it in your favorite editor, but gratuitous GUIs are always nice. 
+If you have a todo.yaml, you can already edit it in your favorite editor, but gratuitous GUIs are always nice.
 
 ## Getting started
 
@@ -18,29 +18,32 @@ You can configure your todo.yaml when the file is created, and you can configure
 
 _Square brackets indicate an optional arguments._
 
-| Command | Description |
-| --- | --- |
-| `todo [file-name]` | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, a choice of yaml files in the directory is given. If there are no yaml files in the directory, the name of the yaml file to be created can be entered. The file name must have a `.yaml` suffix. |
-| `todo.yaml` | Alias for todo |
-| `npx todo.yaml` | Runs todo without globally installing todo.yaml
-| `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd |
-| `todo c` | alias for todo configure` |
-| `todo --version` | Show the version` |
-| `todo -V` | alias for todo --version` |
+| Command                           | Description                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `todo [file-name]`                | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, a choice of yaml files in the directory is given. If there are no yaml files in the directory, the name of the yaml file to be created can be entered. The file name must have a `.yaml` suffix. |
+| `todo.yaml`                       | Alias for todo                                                                                                                                                                                                                                                                                                                                                                                              |
+| `npx todo.yaml`                   | Runs todo without globally installing todo.yaml                                                                                                                                                                                                                                                                                                                                                             |
+| `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd                                                                                                                                                                                                                                                                                                                                                                          |
+| `todo c`                          | alias for todo configure`                                                                                                                                                                                                                                                                                                                                                                                   |
+| `todo --version`                  | Show the version`                                                                                                                                                                                                                                                                                                                                                                                           |
+| `todo -V`                         | alias for todo --version`                                                                                                                                                                                                                                                                                                                                                                                   |
 
 ## Configuration
+
 To configure your `todo.yaml`, run `todo configure`.
 
-- `saveCompleted` Option to save completed todos
-- `columns: dueDate` Option to track due dates
-- `columns: notes` Option to add notes to items
+-   `saveCompleted` Option to save completed todos
+-   `columns: dueDate` Option to track due dates
+-   `columns: notes` Option to add notes to items
 
 ### Try it
+
 ```shell
 npx todo.yaml
 ```
 
 ### Install it
+
 ```shell
 npm i -g todo.yaml
 ```
@@ -51,35 +54,44 @@ The todo.yaml has the following format:
 
 ```yaml
 todo:
-  - item 1
-  - item 2
-configuration:
-  saveCompleted
+    - item 1
+    - item 2
+configuration: saveCompleted
 done:
-  - done item 1
-  - done item 2  
+    - done item 1
+    - done item 2
 ```
 
 ## Tips and Tricks
 
 ### Manual Editing
-* When editing the todo.yaml by hand, you can add in new todo items as strings. They will automatically be turned into objects the next time the api interacts with them.
-* You can edit the configuration file interactively via `todo configure` or manually in your todo.yaml
+
+-   When editing the todo.yaml by hand, you can add in new todo items as strings. They will automatically be turned into objects the next time the api interacts with them.
+-   You can edit the configuration file interactively via `todo configure` or manually in your todo.yaml
 
 ### GUI Editing
-* Double click to edit a todo title.
+
+-   Double click to edit a todo title.
 
 ### Syncing
-* You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile. 
+
+-   You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
 
 ### Organization
-* You can use as many todo.yaml files as you want. Just make sure each is in its own directory.
+
+-   You can use as many todo.yaml files as you want. Just make sure each is in its own directory.
 
 ## Dev Workflow
 
 ```shell
 git clone git@github.com:pajtai/todo.yaml.git
 npm run dev
+```
+
+To install pre-commit hooks:
+
+```shell
+npm set-script prepare "husky install" && npm run prepare
 ```
 
 ## TODO Suggestions

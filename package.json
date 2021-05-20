@@ -1,55 +1,50 @@
 {
-  "name": "todo.yaml",
-  "version": "1.8.0",
-  "description": "A flexible, configurable, and file-based todo tracker.",
-  "main": "cli.js",
-  "type": "module",
-  "bin": {
-    "todo": "./index.js",
-    "todo.yaml": "./index.js"
-  },
-  "scripts": {
-    "start": "todo",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "concurrently 'THE_ENV=dev nodemon ./api/index.js' 'cd app && npm run serve' 'sleep 3 && open http://localhost:8080/'",
-    "build": "cd app && npm run build",
-      "lint": ""
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pajtai/todo.yaml.git"
-  },
-  "keywords": [
-    "todo",
-    "yaml",
-    "configurable"
-  ],
-  "author": "Peter Ajtai",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/pajtai/todo.yaml/issues"
-  },
-  "homepage": "https://github.com/pajtai/todo.yaml#readme",
-  "dependencies": {
-    "chalk": "^4.1.1",
-    "commander": "^7.2.0",
-    "express": "^4.17.1",
-    "glob": "^7.1.7",
-    "inquirer": "^8.0.0",
-    "open": "^8.0.8",
-    "vuedraggable": "^4.0.1",
-    "yaml": "^1.10.2"
-  },
-  "devDependencies": {
-    "concurrently": "^6.1.0",
-    "husky": "^6.0.0",
-    "nodemon": "^2.0.7",
-    "prettier": "^2.3.0",
-    "pretty-quick": "^3.1.0"
-  },
-    "husky": {
-        "hooks": {
-            "pre-commit": "pretty-quick --staged"
-        }
+    "name": "todo.yaml",
+    "version": "1.8.0",
+    "description": "A flexible, configurable, and file-based todo tracker.",
+    "main": "cli.js",
+    "type": "module",
+    "bin": {
+        "todo": "./index.js",
+        "todo.yaml": "./index.js"
+    },
+    "scripts": {
+        "start": "todo",
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "concurrently 'THE_ENV=dev nodemon ./api/index.js' 'cd app && npm run serve' 'sleep 3 && open http://localhost:8080/'",
+        "build": "cd app && npm run build",
+        "prepare": "husky install"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pajtai/todo.yaml.git"
+    },
+    "keywords": [
+        "todo",
+        "yaml",
+        "configurable"
+    ],
+    "author": "Peter Ajtai",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/pajtai/todo.yaml/issues"
+    },
+    "homepage": "https://github.com/pajtai/todo.yaml#readme",
+    "dependencies": {
+        "chalk": "^4.1.1",
+        "commander": "^7.2.0",
+        "express": "^4.17.1",
+        "glob": "^7.1.7",
+        "inquirer": "^8.0.0",
+        "open": "^8.0.8",
+        "vuedraggable": "^4.0.1",
+        "yaml": "^1.10.2"
+    },
+    "devDependencies": {
+        "concurrently": "^6.1.0",
+        "husky": "^6.0.0",
+        "nodemon": "^2.0.7",
+        "prettier": "^2.3.0",
+        "pretty-quick": "^3.1.0"
     }
 }
