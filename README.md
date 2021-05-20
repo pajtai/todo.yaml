@@ -16,16 +16,17 @@ You can configure your todo.yaml when the file is created, and you can configure
 
 ## Commands
 
+_Square brackets indicate an optional arguments._
+
 | Command | Description |
 | --- | --- |
-| todo | Opens the todo GUI. Creates and configures a todo.yaml file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/ |
-| todo.yaml | Alias for todo |
-| npx todo.yaml | Runs todo without globally installing todo.yaml
-| todo <file-name.yaml> | Opens the todo GUI for the yaml file name in the cwd. Creates and configures the file if it doesn't exist. |
-| todo configure | Configure the todo.yaml in the cwd |
-| todo c | alias for todo configure |
-| todo --version | Show the version |
-| todo -V | alias for todo --version |
+| `todo [file-name]` | Opens the todo GUI. Creates and configures a `todo.yaml` file in the cwd if one doesn't already exist. Opens the GUI for editing the todo.yaml file at http://0.0.0.0:8080/. If no file name is specified, the default is `todo.yaml`. The file name must have a `.yaml` suffix. |
+| `todo.yaml` | Alias for todo |
+| `npx todo.yaml` | Runs todo without globally installing todo.yaml
+| `todo configure [file-name.yaml]` | Configure the todo.yaml in the cwd |
+| `todo c` | alias for todo configure` |
+| `todo --version` | Show the version` |
+| `todo -V` | alias for todo --version` |
 
 ## Configuration
 To configure your `todo.yaml`, run `todo configure`.

@@ -12,7 +12,12 @@
             {{ element.title }}
           </div>
           <div v-else>
-            <input v-model="element.title" @keyup.enter="doneEdit(element)" type="text">
+            <input
+              v-todo-focus="element._editing"
+              v-model="editedString"
+              @blur="cancelEdit(element)"
+              @keyup.enter="doneEdit(element)"
+              type="text">
           </div>
           <div v-if="Object.keys(element).includes('notes')" class="notes">
             <span v-if="!element._editingNotes && element.notes" @dblclick="editNotes(element)">{{ element.notes }}</span>
@@ -41,7 +46,8 @@ export default {
     return {
       newTodo: "",
       todos: [],
-      removeKeys: ["_key", "_editing"]
+      removeKeys: ["_key", "_editing"],
+      editedString: null
     }
   },
   async created() {
@@ -118,9 +124,17 @@ export default {
     },
     edit(todo) {
       todo._editing = true;
+      this.editedString = todo.title;
     },
     doneEdit(todo) {
       todo._editing = false;
+      todo.title = this.editedString;
+      this.editedString = null;
+    },
+    cancelEdit(todo) {
+      console.log("cancelled");
+      todo._editing = false;
+      this.editedString = null;
     },
     editNotes(todo) {
       todo._editingNotes = true;
@@ -128,6 +142,13 @@ export default {
     doneEditNotes(todo) {
       todo._editingNotes = false;
     },
+  },
+  directives: {
+    "todo-focus": function(el, binding) {
+      if (binding.value) {
+        el.focus();
+      }
+    }
   }
 };
 

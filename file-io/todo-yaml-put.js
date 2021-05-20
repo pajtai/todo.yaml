@@ -1,6 +1,6 @@
 import {readFile, writeFile} from "fs/promises";
 import { sep } from "path";
-import { CWD, TODO_FILE_NAME } from "../constants.js";
+import configs from "../configs.js";
 import YAML from "yaml";
 
 let fileLocked = false;
@@ -14,7 +14,7 @@ export async function putTodos(todosArray) {
         return;
     }
     fileLocked = true;
-    const todoFile = await readFile([CWD, TODO_FILE_NAME].join(sep), "utf-8");
+    const todoFile = await readFile([configs.CWD, configs.TODO_FILE_NAME].join(sep), "utf-8");
     let todos = YAML.parse(todoFile);
     todos.todo = todosArray.filter(todo => !todo.done);
     if (todos.configuration.saveCompleted) {
@@ -24,7 +24,7 @@ export async function putTodos(todosArray) {
             todos.done = todos.done.concat(done);
         }
     }
-    await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
+    await writeFile([configs.CWD, configs.TODO_FILE_NAME].join(sep), YAML.stringify(todos));
     fileLocked = false;
 }
 

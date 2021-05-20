@@ -1,7 +1,7 @@
 import {access, readFile, writeFile} from "fs/promises";
 import YAML from "yaml";
 import inquirer from "inquirer";
-import { CWD, TODO_FILE_NAME } from "../constants.js";
+import configs from "../configs.js";
 import { sep } from "path";
 import {configure} from "../cli/configure.js";
 
@@ -20,7 +20,7 @@ async function ensureTodoYamlFile() {
         return;
     }
     try {
-        await access([CWD, TODO_FILE_NAME].join(sep));
+        await access([configs.CWD, configs.TODO_FILE_NAME].join(sep));
         fileExists = true;
     } catch {
         fileExists = false;
@@ -32,7 +32,7 @@ async function ensureTodoYamlFile() {
                     {
                         name: "Confirm",
                         type: "confirm",
-                        message: `${TODO_FILE_NAME} not found. Create a ${TODO_FILE_NAME} in this directory?`,
+                        message: `${configs.TODO_FILE_NAME} not found. Create a ${configs.TODO_FILE_NAME} in this directory?`,
                         default: true
                     }
                 ]);
@@ -45,7 +45,7 @@ async function ensureTodoYamlFile() {
                     ],
                     configuration: await configure(configuration)
                 }
-                await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
+                await writeFile([configs.CWD, configs.TODO_FILE_NAME].join(sep), YAML.stringify(todos));
             } else {
                 console.log("Please go to the directory you want your todo.yaml, and try again.");
                 process.exit();
@@ -57,7 +57,7 @@ async function ensureTodoYamlFile() {
 }
 
 async function getTodos() {
-    const todoFile = await readFile([CWD, TODO_FILE_NAME].join(sep), "utf-8");
+    const todoFile = await readFile([configs.CWD, configs.TODO_FILE_NAME].join(sep), "utf-8");
     return YAML.parse(todoFile);
 }
 

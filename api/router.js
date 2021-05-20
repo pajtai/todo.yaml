@@ -1,7 +1,7 @@
 import { Router } from "express";
 import {putTodos} from "../file-io/todo-yaml-put.js";
 import {ensureAndGetTodos} from "../file-io/todo-yaml-ensure-get.js";
-import {CWD, TODO_FILE_NAME} from "../constants.js";
+import configs from "../configs.js";
 import {sep} from "path";
 
 export const router = Router();
@@ -18,7 +18,7 @@ router.post("/todo", async (req, res) => {
 
 router.get("/file", (req, res) => {
     res.json({
-        filePath: [CWD, TODO_FILE_NAME].join(sep)
+        filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep)
     });
 });
 
