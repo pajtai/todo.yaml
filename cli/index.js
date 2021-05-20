@@ -1,15 +1,15 @@
 import { Command } from "commander";
 import { configure } from "./configure.js";
 import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
-import {writeFile} from "fs/promises";
+import { writeFile } from "fs/promises";
 import configs from "../configs.js";
-import {sep} from "path";
+import { sep } from "path";
 import YAML from "yaml";
-import { createRequire } from 'module';
+import { createRequire } from "module";
 const require = createRequire(import.meta.url);
 
 const program = new Command();
-program.version(require("../package.json").version)
+program.version(require("../package.json").version);
 program
     .command("configure [file]")
     .alias("c")
@@ -20,7 +20,10 @@ program
         }
         let todos = await ensureAndGetTodos();
         todos.configuration = await configure(todos.configuration || {});
-        await writeFile([configs.CWD, configs.TODO_FILE_NAME].join(sep), YAML.stringify(todos));
+        await writeFile(
+            [configs.CWD, configs.TODO_FILE_NAME].join(sep),
+            YAML.stringify(todos)
+        );
     });
 
 const options = program.parse(process.argv);

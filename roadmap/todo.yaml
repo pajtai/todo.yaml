@@ -1,34 +1,41 @@
 todo:
-  - title: Newly added todos should have dueDate if required
-  - title: custom columns
-  - title: option to add todos at top or bottom
-  - title: option to delete due date
-  - title: Add function to delete a todo
-  - title: Add optional type
-  - title: Tags
-  - title: Subtasks
-  - title: Full width input
-  - title: X to close browser and turn off server
-  - title: Add optional priority
-  - title: Add optional project
-  - title: 'Remove "done: false" from todo... it is redundant'
-  - title: add optional date completed
+    - title: reorder via gui
+    - title: font size by priority
+    - title: Add optional priority
+    - title: column labels on bottom
+    - title: custom columns
+    - title: option to add todos at top or bottom
+    - title: option to delete due date
+    - title: Add function to delete a todo
+    - title: Add optional type
+    - title: Tags
+    - title: Subtasks
+    - title: Full width input
+    - title: X to close browser and turn off server
+    - title: Add optional project
+    - title: 'Remove "done: false" from todo... it is redundant'
+    - title: add optional date completed
+    - title: list available yaml files in directory
+    - title: prompt for yaml file when creating
+    - title: note about disfluency
+    - title: '"send to top" "send to bottom"'
 configuration:
-  saveCompleted: true
-  columns:
-    dueDate: false
+    saveCompleted: true
+    columns:
+        dueDate: false
 done:
-  - title: Add todo via GUI
-  - title: Complete todo via GUI
-  - title: Reorder items
-  - title: Add ability to edit todos
-  - title: Add configuration options that save to todo.yaml
-  - title: Tips and Tricks
-  - title: Path to todo.yaml at bottom of screen
-  - title: Drag and drop reorder via
-      https://sortablejs.github.io/Vue.Draggable/#/simple
-  - title: Fix, "putTodos attempt while file locked" when reordering
-  - title: remove "key" and "editing" from saved todos
-  - title: 'remove, "done: true" from done todos'
-  - title: Add optional due date
-    dueDate: null
+    - title: Add todo via GUI
+    - title: Complete todo via GUI
+    - title: Reorder items
+    - title: Add ability to edit todos
+    - title: Add configuration options that save to todo.yaml
+    - title: Tips and Tricks
+    - title: Path to todo.yaml at bottom of screen
+    - title: Drag and drop reorder via
+          https://sortablejs.github.io/Vue.Draggable/#/simple
+    - title: Fix, "putTodos attempt while file locked" when reordering
+    - title: remove "key" and "editing" from saved todos
+    - title: 'remove, "done: true" from done todos'
+    - title: Add optional due date
+      dueDate: null
+    - title: Newly added todos should have dueDate if required

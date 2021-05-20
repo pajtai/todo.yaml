@@ -21,19 +21,21 @@ export async function ensureTodoYamlFile() {
     }
     if (!fileExists) {
         try {
-            const answers = await inquirer
-                .prompt([
-                    {
-                        name: "Confirm",
-                        type: "confirm",
-                        message: "todo.yaml not found. Create a todo.yaml in this directory?",
-                        default: false
-                    }
-                ]);
+            const answers = await inquirer.prompt([
+                {
+                    name: "Confirm",
+                    type: "confirm",
+                    message:
+                        "todo.yaml not found. Create a todo.yaml in this directory?",
+                    default: false,
+                },
+            ]);
             if (answers.Confirm) {
                 await writeFile("todo.yaml", defaultTodoFile);
             } else {
-                console.log("Please go to the directory you want your todo.yaml, and try again.");
+                console.log(
+                    "Please go to the directory you want your todo.yaml, and try again."
+                );
                 process.exit();
             }
         } catch (err) {
@@ -41,4 +43,3 @@ export async function ensureTodoYamlFile() {
         }
     }
 }
-

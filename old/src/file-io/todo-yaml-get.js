@@ -1,5 +1,5 @@
 import { readFile } from "fs/promises";
-import {TODO_FILE_PATH} from "../constants.js";
+import { TODO_FILE_PATH } from "../constants.js";
 import YAML from "yaml";
 
 let todos = false;
@@ -16,4 +16,3 @@ export async function getTodos() {
     todos = YAML.parse(todoFile);
     return todos;
 }
-

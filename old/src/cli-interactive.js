@@ -5,45 +5,43 @@ import inquirer from "inquirer";
 import YAML from "yaml";
 import { TODO_FILE_PATH } from "./constants.js";
 
-import {ensureTodoYamlFile} from "./file-io/todo-yaml-ensure.js"
+import { ensureTodoYamlFile } from "./file-io/todo-yaml-ensure.js";
 import { getTodos } from "./file-io/todo-yaml-get.js";
-import {showItemsTodo} from "./todo-utils.js";
+import { showItemsTodo } from "./todo-utils.js";
 
 await ensureTodoYamlFile();
 const todos = await getTodos();
 await showAndModifyTodoList();
 
-async function showAndModifyTodoList () {
+async function showAndModifyTodoList() {
     console.clear();
     const choices = todos.todo.map((todo, index) => {
         return {
             name: todo,
-            value: index
-        }
+            value: index,
+        };
     });
     choices.push({
         name: `+ ` + chalk.green(`Add a todo`),
-        value: `add todo`
+        value: `add todo`,
     });
     choices.push({
         name: `x ` + chalk.red(`Exit`),
-        value: `exit`
+        value: `exit`,
     });
 
-    const answers = await inquirer
-        .prompt([
-            {
-                name: "Todo List",
-                message: "Select the todos to complete, add a todo, or exit.\r\n",
-                type: "checkbox",
-                choices,
-                pageSize: process.stdout.rows - 4
-            },
-        ]);
-
+    const answers = await inquirer.prompt([
+        {
+            name: "Todo List",
+            message: "Select the todos to complete, add a todo, or exit.\r\n",
+            type: "checkbox",
+            choices,
+            pageSize: process.stdout.rows - 4,
+        },
+    ]);
 
     // Needed for the splice command to run from last to first
-    const theAnswers = answers["Todo List"].sort((a,b) => {
+    const theAnswers = answers["Todo List"].sort((a, b) => {
         if (a > b) {
             return -1;
         }
@@ -61,13 +59,12 @@ async function showAndModifyTodoList () {
                     quit = true;
                     break;
                 default:
-                    const answers = await inquirer
-                        .prompt([
-                            {
-                                name: "Task To Add",
-                                type: "input"
-                            }
-                        ]);
+                    const answers = await inquirer.prompt([
+                        {
+                            name: "Task To Add",
+                            type: "input",
+                        },
+                    ]);
                     const todoItem = answers["Task To Add"];
                     todos.todo.push(todoItem);
                     break;
@@ -86,5 +83,3 @@ async function showAndModifyTodoList () {
     }
     await showAndModifyTodoList();
 }
-
-

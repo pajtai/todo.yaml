@@ -1,8 +1,8 @@
 import { Router } from "express";
-import {putTodos} from "../file-io/todo-yaml-put.js";
-import {ensureAndGetTodos} from "../file-io/todo-yaml-ensure-get.js";
+import { putTodos } from "../file-io/todo-yaml-put.js";
+import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 import configs from "../configs.js";
-import {sep} from "path";
+import { sep } from "path";
 
 export const router = Router();
 
@@ -18,7 +18,7 @@ router.post("/todo", async (req, res) => {
 
 router.get("/file", (req, res) => {
     res.json({
-        filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep)
+        filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep),
     });
 });
 
@@ -27,8 +27,8 @@ function ensureTodoStructure(configuration) {
     return (todo) => {
         if (typeof todo === "string") {
             return {
-                title: todo
-            }
+                title: todo,
+            };
         }
 
         if (configuration.columns.dueDate) {
