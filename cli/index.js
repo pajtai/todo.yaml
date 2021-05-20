@@ -5,9 +5,11 @@ import {writeFile} from "fs/promises";
 import {CWD, TODO_FILE_NAME} from "../constants.js";
 import {sep} from "path";
 import YAML from "yaml";
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
 
 const program = new Command();
-
+program.version(require("../package.json").version)
 program
     .command("configure")
     .alias("c")
@@ -18,4 +20,4 @@ program
         await writeFile([CWD, TODO_FILE_NAME].join(sep), YAML.stringify(todos));
     });
 
-program.parse(process.argv);
+const options = program.parse(process.argv);

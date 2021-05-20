@@ -24,6 +24,8 @@ You can configure your todo.yaml when the file is created, and you can configure
 | todo <file-name.yaml> | Opens the todo GUI for the yaml file name in the cwd. Creates and configures the file if it doesn't exist. |
 | todo configure | Configure the todo.yaml in the cwd |
 | todo c | alias for todo configure |
+| todo --version | Show the version |
+| todo -V | alias for todo --version |
 
 ## Configuration
 To configure your `todo.yaml`, run `todo configure`.
