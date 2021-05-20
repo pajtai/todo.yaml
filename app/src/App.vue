@@ -8,7 +8,7 @@
         <div>
             <small>Editing: {{ path }}</small>
         </div>
-        <div @click="close()" class="close">X</div>
+        <div v-if="this.shutdownButton" @click="close()" class="close">X</div>
     </footer>
 </template>
 
@@ -18,11 +18,16 @@ export default {
     data() {
         return {
             path: "",
+            shutdownButton: false,
         };
     },
     async created() {
-        const response = await this.axios.get("/api/file/");
-        this.path = response.data.filePath;
+        const responses = await Promise.all([
+            this.axios.get("/api/file/"),
+            this.axios.get("/api/configuration/"),
+        ]);
+        this.path = responses[0].data.filePath;
+        this.shutdownButton = !!responses[1].data.shutdownServerButton;
     },
     methods: {
         async close() {

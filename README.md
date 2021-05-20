@@ -34,9 +34,10 @@ The "X" button in the lower right will close the window and shut down the server
 
 To configure your `todo.yaml`, run `todo configure`.
 
--   `saveCompleted` Option to save completed todos
--   `columns: dueDate` Option to track due dates
--   `columns: notes` Option to add notes to items
+- `saveCompleted` Option to save completed todos
+- `shuddownServerButton` Option to add an `X` button in the lower right of the GUI that will close the window and shutdown the server  
+- `columns: dueDate` Option to track due dates
+- `columns: notes` Option to add notes to items
 
 ### Try it
 

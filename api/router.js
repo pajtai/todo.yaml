@@ -16,6 +16,11 @@ router.post("/todo", async (req, res) => {
     res.status(200).send();
 });
 
+router.get("/configuration", async (req, res) => {
+    const todos = await ensureAndGetTodos();
+    res.json(todos.configuration);
+});
+
 router.get("/file", (req, res) => {
     res.json({
         filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep),
@@ -48,6 +53,12 @@ function ensureTodoStructure(configuration) {
             todo.notes = todo.notes || "";
         } else {
             delete todo.notes;
+        }
+
+        if (configuration.columns.importance) {
+            todo.importance = todo.importance || 0;
+        } else {
+            delete todo.importance;
         }
 
         return todo;

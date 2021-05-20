@@ -4,7 +4,6 @@ todo:
     - title: column labels on bottom
     - title: option to add todos at top or bottom
     - title: Blur as cancel functionality for all columns not just title
-    - title: X to close browser and turn off server (auto shut off too)
     - title: server running indicator
     - title: reorder via gui
     - title: option to filter by column value
@@ -43,3 +42,4 @@ done:
     - title: 'remove, "done: true" from done todos'
     - title: Add optional due date
     - title: Newly added todos should have dueDate if required
+    - title: X to close browser and turn off server (auto shut off too)

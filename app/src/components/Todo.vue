@@ -31,6 +31,7 @@
                     >
                         <span
                             v-if="!element._editingNotes && element.notes"
+                            @blur="cancelEdit(element)"
                             @dblclick="editNotes(element)"
                             >{{ element.notes }}</span
                         >
@@ -161,7 +162,6 @@ export default {
             this.editedString = null;
         },
         cancelEdit(todo) {
-            console.log("cancelled");
             todo._editing = false;
             this.editedString = null;
         },
