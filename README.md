@@ -40,6 +40,7 @@ The interactive configuration will automatically set the following for you based
 - `saveCompleted` Option to save completed todos
 - `shuddownServerButton` Option to add an `X` button in the lower right of the GUI that will close the window and shutdown the server  
 - `columns: dueDate` Option to track due dates
+- `columns: importance` Option to track importance via a number
 - `columns: notes` Option to add notes to items
 
 ### Try it
