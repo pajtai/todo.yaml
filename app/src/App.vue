@@ -35,12 +35,10 @@ export default {
     },
     methods: {
         async close() {
-            const response = await this.axios.post("/api/shutdown", {
+            await this.axios.post("/api/shutdown", {
                 action: "shutdown",
             });
-            if (response.status === 200) {
-                window.close();
-            }
+            window.close();
         },
     },
 };
