@@ -1,6 +1,6 @@
 <template>
     <div class="home">
-        <Todo v-bind:add-to-top="addToTop" />
+        <Todo v-bind:config="config" />
     </div>
 </template>
 
@@ -13,6 +13,6 @@ export default {
     components: {
         Todo,
     },
-    props: ["addToTop"],
+    props: ["config"],
 };
 </script>

@@ -1,11 +1,13 @@
 todo:
     - title: Add optional priority
     - title: font size by priority
+    - title: 'Filter todos if enter command starting with "/"'
+    - title: Quick filter - type and only show items that contain filter
     - title: column labels on bottom
     - title: option to add todos at top or bottom
     - title: Blur as cancel functionality for all columns not just title
     - title: server running indicator
-    - title: reorder via gui
+    - title: resort via gui
     - title: option to filter by column value
     - title: custom columns
     - title: option to delete due date
@@ -28,6 +30,8 @@ configuration:
     columns:
         dueDate: false
         notes: false
+    shutdownServerButton: true
+    addTodosToTop: true
 done:
     - title: Add todo via GUI
     - title: Complete todo via GUI

@@ -39,7 +39,7 @@ export async function configure(configuration) {
     const columns = [
         { name: "Due Date", value: "dueDate" },
         { name: "Notes", value: "notes" },
-        // { name: "Importance", value: "importance" },
+        { name: "Importance", value: "importance" },
         // {name: "Type", value: "type"},
         // {name: "Context", value: "context"},
         // {name: "Project", value: "project"},

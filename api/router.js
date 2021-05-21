@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { putTodos } from "../file-io/todo-yaml-put.js";
+import { ensureTodoStructure } from "../core/util.js";
 import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 import configs from "../configs.js";
 import { sep } from "path";
@@ -33,34 +34,3 @@ router.post("/shutdown", (req, res) => {
         process.exit();
     }
 });
-
-function ensureTodoStructure(configuration) {
-    configuration.columns = configuration.columns || {};
-    return (todo) => {
-        if (typeof todo === "string") {
-            return {
-                title: todo,
-            };
-        }
-
-        if (configuration.columns.dueDate) {
-            todo.dueDate = todo.dueDate || null;
-        } else {
-            delete todo.dueDate;
-        }
-
-        if (configuration.columns.notes) {
-            todo.notes = todo.notes || "";
-        } else {
-            delete todo.notes;
-        }
-
-        if (configuration.columns.importance) {
-            todo.importance = todo.importance || 0;
-        } else {
-            delete todo.importance;
-        }
-
-        return todo;
-    };
-}

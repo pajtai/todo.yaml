@@ -1,12 +1,12 @@
 <template>
-    <section>
+    <section class="add-todo">
         <input
             class="add-todo__input"
             v-model="newTodo"
+            placeholder="Enter todo"
             @keyup.enter="addTodo"
             type="text"
         />
-        <label class="add-todo__label">Add: </label>
     </section>
     <ul>
         <draggable v-model="todos" item-key="_key" :sort="true">
@@ -25,10 +25,22 @@
                             type="text"
                         />
                     </div>
-                    <div
-                        v-if="Object.keys(element).includes('notes')"
-                        class="notes"
-                    >
+                    <div v-if="config.columns.importance">
+                        <span
+                            v-if="!element._editingImportance"
+                            @dblclick="editImportance(element)"
+                            >{{ element.importance }}</span
+                        >
+                        <input
+                            v-else
+                            v-todo-focus="element._editingImportance"
+                            v-model="editedString"
+                            @blur="cancelEdit(element)"
+                            @keyup.enter="doneEditImportance(element)"
+                            type="number"
+                        />
+                    </div>
+                    <div v-if="config.columns.notes" class="notes">
                         <span
                             v-if="!element._editingNotes && element.notes"
                             @dblclick="editNotes(element)"
@@ -49,7 +61,7 @@
                             type="text"
                         />
                     </div>
-                    <div v-if="Object.keys(element).includes('dueDate')">
+                    <div v-if="config.columns.dueDate">
                         <datepicker
                             :placeholder="`No Due Date`"
                             v-model="element.dueDate"
@@ -58,6 +70,14 @@
                 </li>
             </template>
         </draggable>
+    </ul>
+    <ul class="columns">
+        <li>
+            <div>Title</div>
+            <div v-if="config.columns.importance">Importance</div>
+            <div v-if="config.columns.notes">Notes</div>
+            <div v-if="config.columns.dueDate">Due Date</div>
+        </li>
     </ul>
 </template>
 
@@ -70,21 +90,22 @@ export default {
         draggable,
         datepicker,
     },
-    props: ["addToTop"],
+    props: ["config"],
     data() {
         return {
             newTodo: "",
             todos: [],
-            removeKeys: ["_key", "_editing"],
             editedString: null,
+            keysToDelete: ["_editing", "_editingNotes", "_editingImportance"],
         };
     },
     async created() {
         const response = await this.axios.get("/api/todo/");
         this.todos = response.data.map((todo, index) => {
             todo._key = index;
-            todo._editing = false;
-            todo._editingNotes = false;
+            this.keysToDelete.forEach((key) => {
+                todo[key] = false;
+            });
             if (todo.dueDate) {
                 todo.dueDate = new Date(todo.dueDate);
             }
@@ -108,7 +129,7 @@ export default {
     },
     methods: {
         addTodo() {
-            if (this.addToTop) {
+            if (this.config.addToTop) {
                 this.todos.unshift(this.createTodo(this.newTodo));
             } else {
                 this.todos.push(this.createTodo(this.newTodo));
@@ -134,8 +155,9 @@ export default {
                 "/api/todo/",
                 this.todos.map((todo) => {
                     let copy = Object.assign({}, todo);
-                    delete copy._editing;
-                    delete copy._editingNotes;
+                    this.keysToDelete.forEach((key) => {
+                        delete copy[key];
+                    });
                     delete copy._key;
                     if (!copy.done) {
                         delete copy.done;
@@ -166,9 +188,14 @@ export default {
             todo._editingNotes = true;
             this.editedString = todo.notes;
         },
+        editImportance(todo) {
+            todo._editingImportance = true;
+            this.editedString = todo.importance;
+        },
         cancelEdit(todo) {
             todo._editing = false;
             todo._editingNotes = false;
+            todo._editingImportance = false;
             this.editedString = null;
         },
         doneEdit(todo) {
@@ -179,6 +206,11 @@ export default {
         doneEditNotes(todo) {
             todo._editingNotes = false;
             todo.notes = this.editedString;
+            this.editedString = null;
+        },
+        doneEditImportance(todo) {
+            todo._editingImportance = false;
+            todo.importance = parseInt(this.editedString);
             this.editedString = null;
         },
     },
@@ -192,9 +224,6 @@ export default {
 };
 </script>
 <style>
-section {
-    padding: 1rem 0 0 2rem;
-}
 ul {
     list-style-type: none;
     padding: 0;
@@ -206,7 +235,7 @@ li {
     background-color: #fff;
     margin: 1rem;
     padding: 0.5rem;
-    border-bottom: 1px solid #ababab;
+    border-bottom: 1px solid #aeaeae50;
 }
 li {
     display: flex;
@@ -214,15 +243,17 @@ li {
 li > div {
     flex: 1;
 }
-.add-todo__label {
-    float: left;
-    width: 3rem;
-    color: #aeaeae;
+.add-todo {
+    margin: 1rem;
+    padding: 0.5rem;
 }
 .add-todo__input {
     border: none;
-    border-bottom: 1px solid #aeaeae;
-    width: calc(100% - 4rem);
+    border-bottom: 1px solid #aeaeae50;
+    width: 100%;
+}
+.add-todo__input::placeholder {
+    color: #aeaeae;
 }
 .todo__notes_empty {
     color: #aeaeae;
@@ -230,5 +261,10 @@ li > div {
 .v3dp__datepicker > input {
     border: none;
     cursor: pointer;
+}
+.columns {
+    width: 100%;
+    position: fixed;
+    bottom: 0;
 }
 </style>

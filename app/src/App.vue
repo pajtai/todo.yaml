@@ -3,7 +3,7 @@
     <!--    <router-link to="/">Home</router-link> |-->
     <!--    <router-link to="/about">About</router-link>-->
     <!--  </div>-->
-    <router-view v-if="isMounted" v-bind:add-to-top="addToTop" />
+    <router-view v-if="isMounted" v-bind:config="config" />
     <footer>
         <div>
             <small>Editing: {{ path }}</small>
@@ -30,7 +30,7 @@ export default {
         ]);
         this.path = responses[0].data.filePath;
         this.shutdownButton = !!responses[1].data.shutdownServerButton;
-        this.addToTop = !!responses[1].data.addTodosToTop;
+        this.config = responses[1].data;
         this.isMounted = true;
     },
     methods: {
@@ -77,6 +77,7 @@ body {
 footer {
     color: #ababab;
     font-size: 1rem;
+    margin-bottom: 4rem;
 }
 footer > div {
     display: inline-block;
