@@ -31,7 +31,6 @@
                     >
                         <span
                             v-if="!element._editingNotes && element.notes"
-                            @blur="cancelEdit(element)"
                             @dblclick="editNotes(element)"
                             >{{ element.notes }}</span
                         >
@@ -42,8 +41,10 @@
                             >Add Note</span
                         >
                         <input
+                            v-todo-focus="element._editingNotes"
                             v-if="element._editingNotes"
-                            v-model="element.notes"
+                            v-model="editedString"
+                            @blur="cancelEdit(element)"
                             @keyup.enter="doneEditNotes(element)"
                             type="text"
                         />
@@ -69,6 +70,7 @@ export default {
         draggable,
         datepicker,
     },
+    props: ["addToTop"],
     data() {
         return {
             newTodo: "",
@@ -106,7 +108,11 @@ export default {
     },
     methods: {
         addTodo() {
-            this.todos.push(this.createTodo(this.newTodo));
+            if (this.addToTop) {
+                this.todos.unshift(this.createTodo(this.newTodo));
+            } else {
+                this.todos.push(this.createTodo(this.newTodo));
+            }
             this.newTodo = "";
         },
         createTodo(title) {
@@ -156,20 +162,24 @@ export default {
             todo._editing = true;
             this.editedString = todo.title;
         },
+        editNotes(todo) {
+            todo._editingNotes = true;
+            this.editedString = todo.notes;
+        },
+        cancelEdit(todo) {
+            todo._editing = false;
+            todo._editingNotes = false;
+            this.editedString = null;
+        },
         doneEdit(todo) {
             todo._editing = false;
             todo.title = this.editedString;
             this.editedString = null;
         },
-        cancelEdit(todo) {
-            todo._editing = false;
-            this.editedString = null;
-        },
-        editNotes(todo) {
-            todo._editingNotes = true;
-        },
         doneEditNotes(todo) {
             todo._editingNotes = false;
+            todo.notes = this.editedString;
+            this.editedString = null;
         },
     },
     directives: {

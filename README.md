@@ -32,8 +32,11 @@ The "X" button in the lower right will close the window and shut down the server
 
 ## Configuration
 
-To configure your `todo.yaml`, run `todo configure`.
+To interactively configure your `todo.yaml`, run `todo configure`. 
 
+The interactive configuration will automatically set the following for you based on your choices:
+
+- `addTodosToTop` Option to add new todos at the top of the list vs the bottom
 - `saveCompleted` Option to save completed todos
 - `shuddownServerButton` Option to add an `X` button in the lower right of the GUI that will close the window and shutdown the server  
 - `columns: dueDate` Option to track due dates

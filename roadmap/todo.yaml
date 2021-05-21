@@ -22,6 +22,7 @@ todo:
     - title: prompt for yaml file when creating
     - title: note about disfluency
     - title: Electron/PKG app?
+    - title: cli command to "ls"
 configuration:
     saveCompleted: true
     columns:
