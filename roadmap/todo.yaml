@@ -1,17 +1,11 @@
 todo:
-    - title: Add optional priority
+    - title: Quick filter todos if enter command starting with "/"
     - title: font size by priority
-    - title: 'Filter todos if enter command starting with "/"'
-    - title: Quick filter - type and only show items that contain filter
-    - title: column labels on bottom
-    - title: option to add todos at top or bottom
-    - title: Blur as cancel functionality for all columns not just title
+    - title: Add function to delete a todo
     - title: server running indicator
-    - title: resort via gui
     - title: option to filter by column value
     - title: custom columns
     - title: option to delete due date
-    - title: Add function to delete a todo
     - title: '"send to top" "send to bottom"'
     - title: Add optional type
     - title: Tags
@@ -48,3 +42,8 @@ done:
     - title: Add optional due date
     - title: Newly added todos should have dueDate if required
     - title: X to close browser and turn off server (auto shut off too)
+    - title: Add optional priority
+    - title: resort via gui
+    - title: column labels on bottom
+    - title: option to add todos at top or bottom
+    - title: Blur as cancel functionality for all columns not just title

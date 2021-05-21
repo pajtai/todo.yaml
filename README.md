@@ -28,7 +28,7 @@ _Square brackets indicate an optional arguments._
 | `todo --version`                  | Show the version` |
 | `todo -V`                         | alias for todo --version` |
 
-The "X" button in the lower right will close the window and shut down the server.
+If present, clicking on the title, importance, or due date column headers can be used to resort the items.
 
 ## Configuration
 

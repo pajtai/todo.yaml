@@ -73,10 +73,22 @@
     </ul>
     <ul class="columns">
         <li>
-            <div>Title</div>
-            <div v-if="config.columns.importance">Importance</div>
+            <div class="columns__title" @click="reOrder('title')">Title</div>
+            <div
+                class="columns__importance"
+                v-if="config.columns.importance"
+                @click="reOrder('importance')"
+            >
+                Importance
+            </div>
             <div v-if="config.columns.notes">Notes</div>
-            <div v-if="config.columns.dueDate">Due Date</div>
+            <div
+                class="columns__due-date"
+                v-if="config.columns.dueDate"
+                @click="reOrder('dueDate')"
+            >
+                Due Date
+            </div>
         </li>
     </ul>
 </template>
@@ -147,6 +159,30 @@ export default {
             return Object.assign(newTodo, {
                 title,
                 done: false,
+            });
+        },
+        reOrder(column) {
+            this.todos.sort((a, b) => {
+                const diff = a[column] - b[column];
+                switch (column) {
+                    case "importance":
+                        if (diff > 0) return -1;
+                        if (diff < 0) return 1;
+                        break;
+                    case "dueDate":
+                        if (!a[column] && b[column]) return 1;
+                        if (!b[column] && a[column]) return -1;
+                        if (diff > 0) return 1;
+                        if (diff < 0) return -1;
+                        break;
+                    case "title":
+                        console.log("sort");
+                        if (a[column] < b[column]) return -1;
+                        if (a[column] > b[column]) return 1;
+                        break;
+                }
+
+                return 0;
             });
         },
         save() {
@@ -266,5 +302,12 @@ li > div {
     width: 100%;
     position: fixed;
     bottom: 0;
+}
+.columns__importance:hover::after {
+    content: "▾";
+}
+.columns__due-date:hover::after,
+.columns__title:hover::after {
+    content: "▴";
 }
 </style>
