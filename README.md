@@ -88,8 +88,9 @@ done:
 
 ### Syncing
 
--   You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
+- You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
 - Do you want to share you TODO with the world? `npx localtunnel --port 3000`
+- This is easy to run as a web app via pm2, use `npx todo.yaml` as the `script` and set the `cwd` for the directory your `todo.yaml` is in.
 
 
 ### Organization
