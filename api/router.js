@@ -25,6 +25,7 @@ router.get("/configuration", async (req, res) => {
 router.get("/file", (req, res) => {
     res.json({
         filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep),
+        fileName: configs.TODO_FILE_NAME,
     });
 });
 

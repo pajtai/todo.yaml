@@ -30,6 +30,14 @@ _Square brackets indicate an optional arguments._
 
 If present, clicking on the title, importance, or due date column headers can be used to resort the items.
 
+To add a todo, type it into the input and hit enter.
+
+To search and visually filter all todos across all columns enter a string into the input that begins with `/`. 
+
+![List](screenshots/list.png)
+![Filtering](screenshots/list-filter.png)
+![Sorting](screenshots/list-sort.png)
+
 ## Configuration
 
 To interactively configure your `todo.yaml`, run `todo configure`. 

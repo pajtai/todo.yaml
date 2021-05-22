@@ -2,6 +2,7 @@
     <section class="add-todo">
         <input
             class="add-todo__input"
+            v-bind:class="{ 'add-todo__input-filtering': !!filter }"
             v-model="newTodo"
             placeholder="Enter todo"
             @keyup.enter="addTodo"
@@ -11,7 +12,7 @@
     <ul>
         <draggable v-model="todos" item-key="_key" :sort="true">
             <template #item="{ element }">
-                <li>
+                <li v-if="show(element)">
                     <div v-if="!element._editing" @dblclick="edit(element)">
                         <input v-model="element.done" type="checkbox" />
                         {{ element.title }}
@@ -27,12 +28,24 @@
                     </div>
                     <div v-if="config.columns.importance">
                         <span
-                            v-if="!element._editingImportance"
+                            v-if="
+                                !element._editingImportance &&
+                                element.importance
+                            "
                             @dblclick="editImportance(element)"
                             >{{ element.importance }}</span
                         >
+                        <span
+                            v-if="
+                                !element._editingImportance &&
+                                !element.importance
+                            "
+                            @dblclick="editImportance(element)"
+                            class="todo__importance_empty"
+                            >Add Importance</span
+                        >
                         <input
-                            v-else
+                            v-if="element._editingImportance"
                             v-todo-focus="element._editingImportance"
                             v-model="editedString"
                             @blur="cancelEdit(element)"
@@ -73,7 +86,10 @@
     </ul>
     <ul class="columns">
         <li>
-            <div class="columns__title" @click="reOrder('title')">Title</div>
+            <div class="columns__title" @click="reOrder('title')">
+                <input class="columns__checkbox" type="checkbox" />
+                Title
+            </div>
             <div
                 class="columns__importance"
                 v-if="config.columns.importance"
@@ -106,6 +122,7 @@ export default {
     data() {
         return {
             newTodo: "",
+            filter: null,
             todos: [],
             editedString: null,
             keysToDelete: ["_editing", "_editingNotes", "_editingImportance"],
@@ -138,8 +155,35 @@ export default {
             },
             deep: true,
         },
+        newTodo: {
+            handler() {
+                if (/^\//.test(this.newTodo)) {
+                    this.filter = this.newTodo.substring(1);
+                } else {
+                    this.filter = null;
+                }
+            },
+        },
     },
     methods: {
+        show(todo) {
+            if (!this.filter) {
+                return true;
+            }
+
+            const regex = new RegExp(this.filter, "i");
+            let search = todo.title;
+            if (!isNaN(todo.importance)) {
+                search += "" + todo.importance;
+            }
+            if (typeof todo.notes === "string") {
+                search += todo.notes;
+            }
+            if (todo.dueDate) {
+                search += todo.dueDate.toISOString().slice(0, 10);
+            }
+            return regex.test(search);
+        },
         addTodo() {
             if (this.config.addToTop) {
                 this.todos.unshift(this.createTodo(this.newTodo));
@@ -177,8 +221,10 @@ export default {
                         break;
                     case "title":
                         console.log("sort");
-                        if (a[column] < b[column]) return -1;
-                        if (a[column] > b[column]) return 1;
+                        if (a[column].toLowerCase() < b[column].toLowerCase())
+                            return -1;
+                        if (a[column].toLowerCase() > b[column].toLowerCase())
+                            return 1;
                         break;
                 }
 
@@ -291,7 +337,14 @@ li > div {
 .add-todo__input::placeholder {
     color: #aeaeae;
 }
-.todo__notes_empty {
+.add-todo__input:focus {
+    outline-width: 0;
+}
+.add-todo__input-filtering {
+    color: #0000ae;
+}
+.todo__notes_empty,
+.todo__importance_empty {
     color: #aeaeae;
 }
 .v3dp__datepicker > input {
@@ -309,5 +362,8 @@ li > div {
 .columns__due-date:hover::after,
 .columns__title:hover::after {
     content: "▴";
+}
+.columns__checkbox {
+    visibility: hidden;
 }
 </style>

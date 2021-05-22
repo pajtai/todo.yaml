@@ -1,8 +1,5 @@
 <template>
-    <!--  <div id="nav">-->
-    <!--    <router-link to="/">Home</router-link> |-->
-    <!--    <router-link to="/about">About</router-link>-->
-    <!--  </div>-->
+    <h1>{{ fileName }}</h1>
     <router-view v-if="isMounted" v-bind:config="config" />
     <footer>
         <div>
@@ -18,6 +15,7 @@ export default {
     data() {
         return {
             path: "",
+            name: "",
             shutdownButton: false,
             config: false,
             isMounted: false,
@@ -29,6 +27,7 @@ export default {
             this.axios.get("/api/configuration/"),
         ]);
         this.path = responses[0].data.filePath;
+        this.fileName = responses[0].data.fileName;
         this.shutdownButton = !!responses[1].data.shutdownServerButton;
         this.config = responses[1].data;
         this.isMounted = true;
@@ -46,6 +45,10 @@ export default {
 <style>
 body {
     background-color: #f0ffff;
+}
+h1 {
+    color: #ababab;
+    margin: 0 2rem 0;
 }
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
