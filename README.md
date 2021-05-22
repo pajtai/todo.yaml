@@ -36,6 +36,8 @@ To search and visually filter all todos across all columns enter a string into t
 
 ## Configuration
 
+The app will listen on `process.env.PORT`, or, if that's not present, `3000`.
+
 To interactively configure your `todo.yaml`, run `todo configure`. 
 
 The interactive configuration will automatically set the following for you based on your choices:
