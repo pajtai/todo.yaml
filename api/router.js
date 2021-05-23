@@ -4,7 +4,9 @@ import { ensureTodoStructure } from "../core/util.js";
 import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 import configs from "../configs.js";
 import { sep } from "path";
-
+import util from "util";
+import globCb from "glob";
+const glob = util.promisify(globCb);
 export const router = Router();
 
 router.get("/todo", async (req, res) => {
@@ -27,6 +29,11 @@ router.get("/file", (req, res) => {
         filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep),
         fileName: configs.TODO_FILE_NAME,
     });
+});
+
+router.get("/files", async (req, res) => {
+    const files = await glob([configs.CWD, "*.yaml"].join(sep));
+    res.json(files);
 });
 
 router.post("/shutdown", (req, res) => {

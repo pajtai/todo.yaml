@@ -10,11 +10,17 @@
         />
     </section>
     <ul>
-        <draggable v-model="todos" item-key="_key" :sort="true">
+        <draggable
+            v-model="todos"
+            handle=".handle"
+            item-key="_key"
+            :sort="true"
+        >
             <template #item="{ element }">
                 <li v-if="show(element)">
                     <div v-if="!element._editing" @dblclick="edit(element)">
                         <input v-model="element.done" type="checkbox" />
+                        <i class="fa fa-align-justify handle"></i>&nbsp;
                         {{ element.title }}
                     </div>
                     <div v-else>

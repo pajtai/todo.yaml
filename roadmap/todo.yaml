@@ -1,5 +1,6 @@
 todo:
-    - title: Quick filter todos if enter command starting with "/"
+    - title: dropown to switch among files in directory
+    - title: pwd protect file
     - title: font size by priority
     - title: Add function to delete a todo
     - title: server running indicator
@@ -48,3 +49,4 @@ done:
     - title: column labels on bottom
     - title: option to add todos at top or bottom
     - title: Blur as cancel functionality for all columns not just title
+    - title: Quick filter todos if enter command starting with "/"
