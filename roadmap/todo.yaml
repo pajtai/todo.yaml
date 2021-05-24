@@ -1,11 +1,10 @@
 todo:
-    - title: Is add todos to top option working?
+    - title: dropown to switch among files in directory
     - title: Columns not always equal - rh margin too big on mobile - mobile in general
     - title: a way to see the current configs being applied
     - title: fix issue with hard reloads
     - title: Subtasks
     - title: task count
-    - title: dropown to switch among files in directory
     - title: group dates, today, tomorrow, next week, etc
     - title: pwd protect file
     - title: font size by priority
@@ -57,3 +56,4 @@ done:
     - title: option to add todos at top or bottom
     - title: Blur as cancel functionality for all columns not just title
     - title: Quick filter todos if enter command starting with "/"
+    - title: Is add todos to top option working?
