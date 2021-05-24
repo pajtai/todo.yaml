@@ -9,87 +9,82 @@
             type="text"
         />
     </section>
-    <ul>
-        <draggable
-            v-model="todos"
-            handle=".handle"
-            item-key="_key"
-            :sort="true"
-        >
-            <template #item="{ element }">
-                <li v-if="show(element)">
-                    <div v-if="!element._editing" @dblclick="edit(element)">
-                        <input v-model="element.done" type="checkbox" />
-                        <i class="fa fa-align-justify handle"></i>&nbsp;
-                        {{ element.title }}
-                    </div>
-                    <div v-else>
-                        <input
-                            v-todo-focus="element._editing"
-                            v-model="editedString"
-                            @blur="cancelEdit(element)"
-                            @keyup.enter="doneEdit(element)"
-                            type="text"
-                        />
-                    </div>
-                    <div v-if="config.columns.importance">
-                        <span
-                            v-if="
-                                !element._editingImportance &&
-                                element.importance
-                            "
-                            @dblclick="editImportance(element)"
-                            >{{ element.importance }}</span
-                        >
-                        <span
-                            v-if="
-                                !element._editingImportance &&
-                                !element.importance
-                            "
-                            @dblclick="editImportance(element)"
-                            class="todo__importance_empty"
-                            >Add Importance</span
-                        >
-                        <input
-                            v-if="element._editingImportance"
-                            v-todo-focus="element._editingImportance"
-                            v-model="editedString"
-                            @blur="cancelEdit(element)"
-                            @keyup.enter="doneEditImportance(element)"
-                            type="number"
-                        />
-                    </div>
-                    <div v-if="config.columns.notes" class="notes">
-                        <span
-                            v-if="!element._editingNotes && element.notes"
-                            @dblclick="editNotes(element)"
-                            >{{ element.notes }}</span
-                        >
-                        <span
-                            class="todo__notes_empty"
-                            @dblclick="editNotes(element)"
-                            v-if="!element.notes && !element._editingNotes"
-                            >Add Note</span
-                        >
-                        <input
-                            v-todo-focus="element._editingNotes"
-                            v-if="element._editingNotes"
-                            v-model="editedString"
-                            @blur="cancelEdit(element)"
-                            @keyup.enter="doneEditNotes(element)"
-                            type="text"
-                        />
-                    </div>
-                    <div v-if="config.columns.dueDate">
-                        <datepicker
-                            :placeholder="`No Due Date`"
-                            v-model="element.dueDate"
-                        />
-                    </div>
-                </li>
-            </template>
-        </draggable>
-    </ul>
+    <draggable
+        v-model="todos"
+        handle=".handle"
+        tag="ul"
+        item-key="_key"
+        :sort="true"
+    >
+        <template #item="{ element }" v-if="show(element)">
+            <li>
+                <div v-if="!element._editing" @dblclick="edit(element)">
+                    <input v-model="element.done" type="checkbox" />
+                    <i class="fa fa-align-justify handle"></i>&nbsp;
+                    {{ element.title }}
+                </div>
+                <div v-else>
+                    <input
+                        v-todo-focus="element._editing"
+                        v-model="editedString"
+                        @blur="cancelEdit(element)"
+                        @keyup.enter="doneEdit(element)"
+                        type="text"
+                    />
+                </div>
+                <div v-if="config.columns.importance">
+                    <span
+                        v-if="!element._editingImportance && element.importance"
+                        @dblclick="editImportance(element)"
+                        >{{ element.importance }}</span
+                    >
+                    <span
+                        v-if="
+                            !element._editingImportance && !element.importance
+                        "
+                        @dblclick="editImportance(element)"
+                        class="todo__importance_empty"
+                        >Add Importance</span
+                    >
+                    <input
+                        v-if="element._editingImportance"
+                        v-todo-focus="element._editingImportance"
+                        v-model="editedString"
+                        @blur="cancelEdit(element)"
+                        @keyup.enter="doneEditImportance(element)"
+                        type="number"
+                    />
+                </div>
+                <div v-if="config.columns.notes" class="notes">
+                    <span
+                        v-if="!element._editingNotes && element.notes"
+                        @dblclick="editNotes(element)"
+                        >{{ element.notes }}</span
+                    >
+                    <span
+                        class="todo__notes_empty"
+                        @dblclick="editNotes(element)"
+                        v-if="!element.notes && !element._editingNotes"
+                        >Add Note</span
+                    >
+                    <input
+                        v-todo-focus="element._editingNotes"
+                        v-if="element._editingNotes"
+                        v-model="editedString"
+                        @blur="cancelEdit(element)"
+                        @keyup.enter="doneEditNotes(element)"
+                        type="text"
+                    />
+                </div>
+                <div v-if="config.columns.dueDate">
+                    <datepicker
+                        :placeholder="`No Due Date`"
+                        v-model="element.dueDate"
+                    />
+                </div>
+            </li>
+        </template>
+    </draggable>
     <ul class="columns">
         <li>
             <div class="columns__title" @click="reOrder('title')">
@@ -191,7 +186,7 @@ export default {
             return regex.test(search);
         },
         addTodo() {
-            if (this.config.addToTop) {
+            if (this.config.addTodosToTop) {
                 this.todos.unshift(this.createTodo(this.newTodo));
             } else {
                 this.todos.push(this.createTodo(this.newTodo));
@@ -361,6 +356,13 @@ li > div {
     width: 100%;
     position: fixed;
     bottom: 0;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+    -khtml-user-select: none; /* Konqueror HTML */
+    -moz-user-select: none; /* Old versions of Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }
 .columns__importance:hover::after {
     content: "▾";

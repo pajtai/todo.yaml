@@ -49,6 +49,8 @@ The interactive configuration will automatically set the following for you based
 - `columns: importance` Option to track importance via a number
 - `columns: notes` Option to add notes to items
 
+To sort by two columns on them one after another. For example to sort by Due Date and Importance, click on Importance first and then Due Date.
+
 ### Try it
 
 ```shell
@@ -121,6 +123,13 @@ Some people say it's a good idea to write down ALL your todos, since there is a 
 Don't be afraid to delete todos.
 
 I think people have a built-in aversion to loss and missing out. This causes our todos to accumulate more and more items until the important items are flooded by the trivial items. It's a good idea to delete old todos that you're not going to do.
+
+## FAQ
+- Q: What dependencies are required to run `todo.yaml`?
+    - You can run `todo.yaml` if you have Node installed. I suggest using [nvm](https://github.com/nvm-sh/nvm) to install Node.
+- Q: Wouldn't using a DB be better?
+    A: Depends what you mean by "better." Using a file allows easy easy setup with the need to configure a DB. Using a file alsow allow you to easily work with and own your data.
+    
 
 ## Roadmap
 
