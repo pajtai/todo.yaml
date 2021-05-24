@@ -63,20 +63,6 @@ npx todo.yaml
 npm i -g todo.yaml
 ```
 
-## Format
-
-The todo.yaml has the following format:
-
-```yaml
-todo:
-    - item 1
-    - item 2
-configuration: saveCompleted
-done:
-    - done item 1
-    - done item 2
-```
-
 ## Tips and Tricks
 
 ### Manual Editing
@@ -93,7 +79,6 @@ done:
 - You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
 - Do you want to share you TODO with the world? `npx localtunnel --port 3000`
 - This is easy to run as a web app via pm2, use `npx todo.yaml` as the `script` and set the `cwd` for the directory your `todo.yaml` is in.
-
 
 ### Organization
 
@@ -134,7 +119,6 @@ I think people have a built-in aversion to loss and missing out. This causes our
 - Q: I update the app, and I see a blank screen. How can I fix this?
     - A: It's a caching issue. So if you [hard reload](https://www.hexnode.com/mobile-device-management/help/how-to-clear-cache-and-hard-reload-browsers/), the problem should go away.         
     
-
 ## Roadmap
 
 Obviously, it's a [`todo.yaml`](roadmap/todo.yaml)!
