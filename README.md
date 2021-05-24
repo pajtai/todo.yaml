@@ -126,9 +126,13 @@ I think people have a built-in aversion to loss and missing out. This causes our
 
 ## FAQ
 - Q: What dependencies are required to run `todo.yaml`?
-    - You can run `todo.yaml` if you have Node installed. I suggest using [nvm](https://github.com/nvm-sh/nvm) to install Node.
+    - A: You can run `todo.yaml` if you have Node installed. I suggest using [nvm](https://github.com/nvm-sh/nvm) to install Node.
 - Q: Wouldn't using a DB be better?
-    A: Depends what you mean by "better." Using a file allows easy easy setup with the need to configure a DB. Using a file alsow allow you to easily work with and own your data.
+    - A: Depends on what you mean by "better." Using a file allows easy easy setup with the need to configure a DB. Using a file alsow allow you to easily work with and own your data.
+- Q: How do you update the app?
+    - A: `npm i -g todo.yaml` will install or update the app.
+- Q: I update the app, and I see a blank screen. How can I fix this?
+    - A: It's a caching issue. So if you [hard reload](https://www.hexnode.com/mobile-device-management/help/how-to-clear-cache-and-hard-reload-browsers/), the problem should go away.         
     
 
 ## Roadmap
