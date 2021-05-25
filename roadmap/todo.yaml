@@ -1,5 +1,7 @@
 todo:
     - title: dropown to switch among files in directory
+    - title: switch to css grid
+    - title: md support using https://www.npmjs.com/package/marked
     - title: Columns not always equal - rh margin too big on mobile - mobile in general
     - title: a way to see the current configs being applied
     - title: fix issue with hard reloads
@@ -57,3 +59,4 @@ done:
     - title: Blur as cancel functionality for all columns not just title
     - title: Quick filter todos if enter command starting with "/"
     - title: Is add todos to top option working?
+    - title: forward slash search is not working

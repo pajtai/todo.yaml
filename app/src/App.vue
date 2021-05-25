@@ -1,7 +1,7 @@
 <template>
-    <h1>{{ fileName }}</h1>
+    <h1 v-if="isMounted">{{ fileName }}</h1>
     <router-view v-if="isMounted" v-bind:config="config" />
-    <footer>
+    <footer v-if="isMounted">
         <div>
             <small>Editing: {{ path }}</small>
         </div>
@@ -23,7 +23,7 @@ export default {
     },
     async created() {
         const responses = await Promise.all([
-            this.axios.get("/api/file/"),
+            this.axios.get("/api/files/"),
             this.axios.get("/api/configuration/"),
         ]);
         this.path = responses[0].data.filePath;

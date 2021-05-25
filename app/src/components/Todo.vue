@@ -16,8 +16,8 @@
         item-key="_key"
         :sort="true"
     >
-        <template #item="{ element }" v-if="show(element)">
-            <li>
+        <template #item="{ element }">
+            <li v-if="element && show(element)">
                 <div v-if="!element._editing" @dblclick="edit(element)">
                     <input v-model="element.done" type="checkbox" />
                     <i class="fa fa-align-justify handle"></i>&nbsp;
@@ -32,7 +32,7 @@
                         type="text"
                     />
                 </div>
-                <div v-if="config.columns.importance">
+                <div class="todo__importance" v-if="config.columns.importance">
                     <span
                         v-if="!element._editingImportance && element.importance"
                         @dblclick="editImportance(element)"
@@ -76,7 +76,7 @@
                         type="text"
                     />
                 </div>
-                <div v-if="config.columns.dueDate">
+                <div class="todo__date" v-if="config.columns.dueDate">
                     <datepicker
                         :placeholder="`No Due Date`"
                         v-model="element.dueDate"

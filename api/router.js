@@ -24,16 +24,14 @@ router.get("/configuration", async (req, res) => {
     res.json(todos.configuration);
 });
 
-router.get("/file", (req, res) => {
-    res.json({
-        filePath: [configs.CWD, configs.TODO_FILE_NAME].join(sep),
-        fileName: configs.TODO_FILE_NAME,
-    });
-});
-
 router.get("/files", async (req, res) => {
-    const files = await glob([configs.CWD, "*.yaml"].join(sep));
-    res.json(files);
+    const allYamlFiles = await glob([configs.CWD, "*.yaml"].join(sep));
+    const currentFilePath = [configs.CWD, configs.TODO_FILE_NAME].join(sep);
+    res.json({
+        filePath: currentFilePath,
+        fileName: configs.TODO_FILE_NAME,
+        otherFiles: allYamlFiles.filter((file) => currentFilePath === file),
+    });
 });
 
 router.post("/shutdown", (req, res) => {
