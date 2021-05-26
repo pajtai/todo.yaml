@@ -17,7 +17,7 @@
         :sort="true"
     >
         <template #item="{ element }">
-            <li v-if="element && show(element)">
+            <li class="todo__item" v-if="element && show(element)">
                 <div v-if="!element._editing" @dblclick="edit(element)">
                     <input v-model="element.done" type="checkbox" />
                     <i class="fa fa-align-justify handle"></i>&nbsp;
@@ -86,7 +86,7 @@
         </template>
     </draggable>
     <ul class="columns">
-        <li>
+        <li class="todo__item">
             <div class="columns__title" @click="reOrder('title')">
                 <input class="columns__checkbox" type="checkbox" />
                 Title
@@ -307,12 +307,7 @@ export default {
 };
 </script>
 <style>
-ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-li {
+.todo__item {
     cursor: pointer;
     text-align: left;
     background-color: #fff;
@@ -320,10 +315,10 @@ li {
     padding: 0.5rem;
     border-bottom: 1px solid #aeaeae50;
 }
-li {
+.todo__item {
     display: flex;
 }
-li > div {
+.todo__item > div {
     flex: 1;
 }
 .add-todo {

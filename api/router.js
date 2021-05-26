@@ -3,7 +3,7 @@ import { putTodos } from "../file-io/todo-yaml-put.js";
 import { ensureTodoStructure } from "../core/util.js";
 import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
 import configs from "../configs.js";
-import { sep } from "path";
+import { sep, basename } from "path";
 import util from "util";
 import globCb from "glob";
 const glob = util.promisify(globCb);
@@ -30,7 +30,14 @@ router.get("/files", async (req, res) => {
     res.json({
         filePath: currentFilePath,
         fileName: configs.TODO_FILE_NAME,
-        otherFiles: allYamlFiles.filter((file) => currentFilePath === file),
+        otherFiles: allYamlFiles
+            .filter((file) => currentFilePath === file)
+            .map((file) => {
+                return {
+                    filePath: file,
+                    fileName: basename(file),
+                };
+            }),
     });
 });
 
