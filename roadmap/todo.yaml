@@ -1,5 +1,4 @@
 todo:
-    - title: dropown to switch among files in directory
     - title: switch to css grid
     - title: md support using https://www.npmjs.com/package/marked
     - title: Columns not always equal - rh margin too big on mobile - mobile in general
@@ -19,7 +18,6 @@ todo:
     - title: '"send to top" "send to bottom"'
     - title: Add optional type
     - title: Tags
-    - title: Subtasks
     - title: Full width input
     - title: Add optional project
     - title: 'Remove "done: false" from todo... it is redundant'
@@ -60,3 +58,4 @@ done:
     - title: Quick filter todos if enter command starting with "/"
     - title: Is add todos to top option working?
     - title: forward slash search is not working
+    - title: dropown to switch among files in directory

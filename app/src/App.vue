@@ -12,7 +12,10 @@
                 v-bind:key="file.fileName"
             >
                 <small
-                    ><a v-bind:href="link(file)"
+                    ><a
+                        @click.prevent
+                        @click="go(file)"
+                        v-bind:href="link(file)"
                         >Switch to: {{ file.filePath }}</a
                     ></small
                 >
@@ -35,17 +38,22 @@ export default {
             otherFiles: [],
         };
     },
-    async created() {
-        const responses = await Promise.all([
-            this.axios.get("/api/files/"),
-            this.axios.get("/api/configuration/"),
-        ]);
-        this.path = responses[0].data.filePath;
-        this.fileName = responses[0].data.fileName;
-        this.otherFiles = responses[0].data.otherFiles || [];
-        this.shutdownButton = !!responses[1].data.shutdownServerButton;
-        this.config = responses[1].data;
-        this.isMounted = true;
+    watch: {
+        // we need to watch the route, since get param changes don't trigger a re-render
+        $route: {
+            async handler() {
+                const responses = await Promise.all([
+                    this.axios.get(`/api/files/${this.getParam()}`),
+                    this.axios.get(`/api/configuration/${this.getParam()}`),
+                ]);
+                this.path = responses[0].data.filePath;
+                this.fileName = responses[0].data.fileName;
+                this.otherFiles = responses[0].data.otherFiles || [];
+                this.shutdownButton = !!responses[1].data.shutdownServerButton;
+                this.config = responses[1].data;
+                this.isMounted = true;
+            },
+        },
     },
     methods: {
         async close() {
@@ -56,6 +64,15 @@ export default {
         },
         link(file) {
             return `/?file=${file.fileName}`;
+        },
+        go(file) {
+            console.log(this.link(file));
+            this.$router.push(this.link(file));
+        },
+        getParam() {
+            return this.$route.query.file
+                ? `?file=${this.$route.query.file}`
+                : "";
         },
     },
 };
@@ -124,5 +141,9 @@ footer > div {
 }
 .files:hover > .files__choices {
     display: inherit;
+}
+.files > li:hover {
+    background-color: #fff;
+    border: 1px solid #f0ffff;
 }
 </style>

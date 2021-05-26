@@ -130,20 +130,14 @@ export default {
         };
     },
     async created() {
-        const response = await this.axios.get("/api/todo/");
-        this.todos = response.data.map((todo, index) => {
-            todo._key = index;
-            this.keysToDelete.forEach((key) => {
-                todo[key] = false;
-            });
-            if (todo.dueDate) {
-                todo.dueDate = new Date(todo.dueDate);
-            }
-            return todo;
-        });
-        this.saveChanges = true;
+        await this.displayTodos();
     },
     watch: {
+        $route: {
+            handler() {
+                this.displayTodos();
+            },
+        },
         todos: {
             handler() {
                 if (!this.saveChanges) {
@@ -167,6 +161,27 @@ export default {
         },
     },
     methods: {
+        async displayTodos() {
+            const response = await this.axios.get(
+                `/api/todo/${this.getParam()}`
+            );
+            this.todos = response.data.map((todo, index) => {
+                todo._key = index;
+                this.keysToDelete.forEach((key) => {
+                    todo[key] = false;
+                });
+                if (todo.dueDate) {
+                    todo.dueDate = new Date(todo.dueDate);
+                }
+                return todo;
+            });
+            this.saveChanges = true;
+        },
+        getParam() {
+            return this.$route.query.file
+                ? `?file=${this.$route.query.file}`
+                : "";
+        },
         show(todo) {
             if (!this.filter) {
                 return true;
@@ -235,7 +250,7 @@ export default {
         save() {
             // this will save any just completed todos
             this.axios.post(
-                "/api/todo/",
+                `/api/todo/${this.getParam()}`,
                 this.todos.map((todo) => {
                     let copy = Object.assign({}, todo);
                     this.keysToDelete.forEach((key) => {

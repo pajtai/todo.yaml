@@ -1,6 +1,6 @@
 import { Command } from "commander";
 import { configure } from "./configure.js";
-import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure-get.js";
+import { ensureAndGetTodos } from "../file-io/todo-yaml-ensure.js";
 import { writeFile } from "fs/promises";
 import configs from "../configs.js";
 import { sep } from "path";

@@ -4,12 +4,13 @@ import inquirer from "inquirer";
 import configs from "../configs.js";
 import { sep } from "path";
 import { configure } from "../cli/configure.js";
+import { getTodos } from "./todo-yaml-get.js";
 
 let fileExists = false;
 
 export async function ensureAndGetTodos() {
     await ensureTodoYamlFile();
-    return await getTodos();
+    return await getTodos(configs.TODO_FILE_NAME);
 }
 /**
  * Ensure the todo file exists. Use a singleton variable to track whether file is created.
@@ -56,12 +57,4 @@ async function ensureTodoYamlFile() {
             console.log(`Whoops. Couldn't create todo.yaml: ${err}`);
         }
     }
-}
-
-async function getTodos() {
-    const todoFile = await readFile(
-        [configs.CWD, configs.TODO_FILE_NAME].join(sep),
-        "utf-8"
-    );
-    return YAML.parse(todoFile);
 }
