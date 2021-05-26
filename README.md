@@ -28,11 +28,12 @@ _Square brackets indicate an optional arguments._
 | `todo --version`                  | Show the version` |
 | `todo -V`                         | alias for todo --version` |
 
-If present, clicking on the title, importance, or due date column headers can be used to resort the items.
+## GUI
 
-To add a todo, type it into the input and hit enter.
-
-To search and visually filter all todos across all columns enter a string into the input that begins with `/`. 
+- To search and visually filter all todos across all columns enter a string into the input that begins with `/`. 
+- If present, clicking on the title, importance, or due date column headers can be used to resort the items.
+- To add a todo, type it into the input and hit enter.
+- To switch between yaml files in the same directory use the dropdown. You should configure each yaml file with the CLI before you start interacting with it.
 
 ## Configuration
 
@@ -70,10 +71,6 @@ npm i -g todo.yaml
 -   When editing the todo.yaml by hand, you can add in new todo items as strings. They will automatically be turned into objects the next time the api interacts with them.
 -   You can edit the configuration file interactively via `todo configure` or manually in your todo.yaml
 
-### GUI Editing
-
--   Double click to edit a todo title.
-
 ### Syncing
 
 - You can use Dropbox or other methods to sync your todo.yamls between desktop and mobile.
@@ -82,7 +79,7 @@ npm i -g todo.yaml
 
 ### Organization
 
--   You can use as many todo.yaml files as you want. Just make sure each is in its own directory.
+-   You can use as many yaml files as you want and you can switch among them with the dropdown on the bottom left. You can only switch among yaml files in the same directory.
 
 ## Dev Workflow
 
