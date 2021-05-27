@@ -18,9 +18,32 @@
     >
         <template #item="{ element }">
             <li class="todo__item" v-if="element && show(element)">
-                <div v-if="!element._editing" @dblclick="edit(element)">
-                    <input v-model="element.done" type="checkbox" />
-                    <i class="fa fa-align-justify handle"></i>&nbsp;
+                <div
+                    v-if="!element._editing"
+                    @dblclick="edit(element)"
+                    style="position: relative; margin-right: 1rem"
+                >
+                    <input
+                        class="todo__input"
+                        v-model="element.done"
+                        type="checkbox"
+                    />
+                    <i class="fa fa-align-justify handle"></i>
+                    &nbsp;
+                    <span v-if="config.subtasks">
+                        <i
+                            @click="toggleSubtasks(element)"
+                            v-if="element._showSubstasks"
+                            class="fa fa-chevron-up"
+                        ></i>
+                        <i
+                            @click="toggleSubtasks(element)"
+                            v-else
+                            class="fa fa-chevron-down"
+                        ></i>
+                    </span>
+
+                    &nbsp;
                     {{ element.title }}
                 </div>
                 <div v-else>
@@ -82,6 +105,30 @@
                         v-model="element.dueDate"
                     />
                 </div>
+                <div class="break"></div>
+                <ul
+                    v-if="config.subtasks && element._showSubstasks"
+                    class="todo__subtasks"
+                >
+                    <li
+                        v-for="subtask in element.subtasks"
+                        v-bind:key="subtask"
+                    >
+                        <input
+                            class="todd__input"
+                            type="checkbox"
+                            @change="finishSubtask(subtask, element)"
+                        />{{ subtask }}
+                    </li>
+                </ul>
+                <input
+                    class="add-subtask__input"
+                    v-if="config.subtasks && element._showSubstasks"
+                    type="text"
+                    v-model="element._newSubtask"
+                    placeholder="Enter subtask"
+                    @keyup.enter="addSubtask(element)"
+                />
             </li>
         </template>
     </draggable>
@@ -126,7 +173,13 @@ export default {
             filter: null,
             todos: [],
             editedString: null,
-            keysToDelete: ["_editing", "_editingNotes", "_editingImportance"],
+            keysToDelete: [
+                "_editing",
+                "_editingNotes",
+                "_editingImportance",
+                "_newSubtask",
+                "_showSubtasks",
+            ],
         };
     },
     async created() {
@@ -173,6 +226,7 @@ export default {
                 if (todo.dueDate) {
                     todo.dueDate = new Date(todo.dueDate);
                 }
+                todo._newSubtask = "";
                 return todo;
             });
             this.saveChanges = true;
@@ -207,6 +261,18 @@ export default {
                 this.todos.push(this.createTodo(this.newTodo));
             }
             this.newTodo = "";
+        },
+        addSubtask(todo) {
+            todo.subtasks = todo.subtasks || [];
+            todo.subtasks.push(todo._newSubtask);
+            todo._newSubtask = "";
+        },
+        finishSubtask(subtask, todo) {
+            todo.subtasks.splice(todo.subtasks.indexOf(subtask), 1);
+        },
+        toggleSubtasks(todo) {
+            todo._showSubstasks = !todo._showSubstasks;
+            console.log(todo._showSubstasks);
         },
         createTodo(title) {
             let newTodo = {};
@@ -332,9 +398,21 @@ export default {
 }
 .todo__item {
     display: flex;
+    flex-wrap: wrap;
+}
+.todo__input {
+    cursor: pointer;
 }
 .todo__item > div {
     flex: 1;
+}
+.todo__item > .break {
+    flex-basis: 100%;
+    height: 0;
+}
+.todo__subtasks {
+    margin-left: 4rem;
+    color: gray;
 }
 .add-todo {
     margin: 1rem;
@@ -343,6 +421,10 @@ export default {
 .add-todo__input {
     border: none;
     border-bottom: 1px solid #aeaeae50;
+    width: 100%;
+}
+.add-subtask__input {
+    border: 1px solid #aeaeae50;
     width: 100%;
 }
 .add-todo__input::placeholder {
