@@ -4,6 +4,7 @@
             class="add-todo__input"
             v-bind:class="{ 'add-todo__input-filtering': !!filter }"
             v-model="newTodo"
+            autofocus
             placeholder="Enter todo"
             @keyup.enter="addTodo"
             type="text"
@@ -12,18 +13,23 @@
     <draggable
         v-model="todos"
         handle=".handle"
-        tag="ul"
+        tag="div"
+        class="todo"
         item-key="_key"
         :sort="true"
     >
         <template #item="{ element }">
-            <li class="todo__item" v-if="element && show(element)">
-                <div v-if="!element._editing" @dblclick="edit(element)">
+            <template v-if="element && show(element)">
+                <div
+                    class="todo__column"
+                    v-if="!element._editing"
+                    @dblclick="edit(element)"
+                >
                     <input v-model="element.done" type="checkbox" />
                     <i class="fa fa-align-justify handle"></i>&nbsp;
                     {{ element.title }}
                 </div>
-                <div v-else>
+                <div class="todo__column" v-else>
                     <input
                         v-todo-focus="element._editing"
                         v-model="editedString"
@@ -32,65 +38,80 @@
                         type="text"
                     />
                 </div>
-                <div class="todo__importance" v-if="config.columns.importance">
-                    <span
-                        v-if="!element._editingImportance && element.importance"
-                        @dblclick="editImportance(element)"
-                        >{{ element.importance }}</span
+                <div
+                    class="todo__column-grid"
+                    v-if="
+                        config.columns.importance ||
+                        config.columns.notes ||
+                        config.columns.dueDate
+                    "
+                >
+                    <div
+                        class="todo__importance"
+                        v-if="config.columns.importance"
                     >
-                    <span
-                        v-if="
-                            !element._editingImportance && !element.importance
-                        "
-                        @dblclick="editImportance(element)"
-                        class="todo__importance_empty"
-                        >Add Importance</span
-                    >
-                    <input
-                        v-if="element._editingImportance"
-                        v-todo-focus="element._editingImportance"
-                        v-model="editedString"
-                        @blur="cancelEdit(element)"
-                        @keyup.enter="doneEditImportance(element)"
-                        type="number"
-                    />
+                        <span
+                            v-if="
+                                !element._editingImportance &&
+                                element.importance
+                            "
+                            @dblclick="editImportance(element)"
+                            >{{ element.importance }}</span
+                        >
+                        <span
+                            v-if="
+                                !element._editingImportance &&
+                                !element.importance
+                            "
+                            @dblclick="editImportance(element)"
+                            class="todo__importance_empty"
+                            >Add Importance</span
+                        >
+                        <input
+                            v-if="element._editingImportance"
+                            v-todo-focus="element._editingImportance"
+                            v-model="editedString"
+                            @blur="cancelEdit(element)"
+                            @keyup.enter="doneEditImportance(element)"
+                            type="number"
+                        />
+                    </div>
+                    <div v-if="config.columns.notes" class="notes">
+                        <span
+                            v-if="!element._editingNotes && element.notes"
+                            @dblclick="editNotes(element)"
+                            >{{ element.notes }}</span
+                        >
+                        <span
+                            class="todo__notes_empty"
+                            @dblclick="editNotes(element)"
+                            v-if="!element.notes && !element._editingNotes"
+                            >Add Note</span
+                        >
+                        <input
+                            v-todo-focus="element._editingNotes"
+                            v-if="element._editingNotes"
+                            v-model="editedString"
+                            @blur="cancelEdit(element)"
+                            @keyup.enter="doneEditNotes(element)"
+                            type="text"
+                        />
+                    </div>
+                    <div class="todo__date" v-if="config.columns.dueDate">
+                        <datepicker
+                            :placeholder="`No Due Date`"
+                            v-model="element.dueDate"
+                        />
+                    </div>
                 </div>
-                <div v-if="config.columns.notes" class="notes">
-                    <span
-                        v-if="!element._editingNotes && element.notes"
-                        @dblclick="editNotes(element)"
-                        >{{ element.notes }}</span
-                    >
-                    <span
-                        class="todo__notes_empty"
-                        @dblclick="editNotes(element)"
-                        v-if="!element.notes && !element._editingNotes"
-                        >Add Note</span
-                    >
-                    <input
-                        v-todo-focus="element._editingNotes"
-                        v-if="element._editingNotes"
-                        v-model="editedString"
-                        @blur="cancelEdit(element)"
-                        @keyup.enter="doneEditNotes(element)"
-                        type="text"
-                    />
-                </div>
-                <div class="todo__date" v-if="config.columns.dueDate">
-                    <datepicker
-                        :placeholder="`No Due Date`"
-                        v-model="element.dueDate"
-                    />
-                </div>
-            </li>
+            </template>
         </template>
     </draggable>
-    <ul class="columns">
-        <li class="todo__item">
-            <div class="columns__title" @click="reOrder('title')">
-                <input class="columns__checkbox" type="checkbox" />
-                Title
-            </div>
+    <div class="todo__labels">
+        <div class="todo__column columns__title" @click="reOrder('title')">
+            Title
+        </div>
+        <div class="todo__column-grid">
             <div
                 class="columns__importance"
                 v-if="config.columns.importance"
@@ -106,8 +127,8 @@
             >
                 Due Date
             </div>
-        </li>
-    </ul>
+        </div>
+    </div>
 </template>
 
 <script>
@@ -322,23 +343,9 @@ export default {
 };
 </script>
 <style>
-.todo__item {
-    cursor: pointer;
-    text-align: left;
-    background-color: #fff;
-    margin: 1rem;
-    padding: 0.5rem;
-    border-bottom: 1px solid #aeaeae50;
-}
-.todo__item {
-    display: flex;
-}
-.todo__item > div {
-    flex: 1;
-}
 .add-todo {
     margin: 1rem;
-    padding: 0.5rem;
+    padding-top: 0.5rem;
 }
 .add-todo__input {
     border: none;
@@ -362,9 +369,10 @@ export default {
     border: none;
     cursor: pointer;
 }
-.columns {
+.todo__labels {
     width: 100%;
     position: fixed;
+    background-color: #fff;
     bottom: 0;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -383,5 +391,45 @@ export default {
 }
 .columns__checkbox {
     visibility: hidden;
+}
+.todo,
+.todo__labels {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr;
+    padding-top: 1rem;
+}
+.todo__column-grid {
+    border-bottom: 1px solid #aeaeae50;
+    margin-bottom: 1rem;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+.todo__column {
+    margin-left: 1rem;
+}
+@media only screen and (min-width: 601px) {
+    .todo,
+    .todo__labels {
+        grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+        grid-auto-rows: 1fr;
+    }
+    .todo__column {
+        border-bottom: 1px solid #aeaeae50;
+        margin-bottom: 1rem;
+    }
+    .todo__column-grid {
+        margin-left: 0;
+    }
+}
+
+.todo__column-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.todo__labels > .todo__column,
+.todo__labels > .todo__column-grid {
+    border: none;
 }
 </style>
