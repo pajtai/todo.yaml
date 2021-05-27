@@ -1,12 +1,12 @@
 todo:
+    - title: 'Bug: "x" should be inline with file path'
     - title: switch to css grid
+    - title: group dates, today, tomorrow, next week, etc
     - title: md support using https://www.npmjs.com/package/marked
     - title: Columns not always equal - rh margin too big on mobile - mobile in general
     - title: a way to see the current configs being applied
     - title: fix issue with hard reloads
-    - title: Subtasks
     - title: task count
-    - title: group dates, today, tomorrow, next week, etc
     - title: pwd protect file
     - title: font size by priority
     - title: Add function to delete a todo
@@ -59,3 +59,5 @@ done:
     - title: Is add todos to top option working?
     - title: forward slash search is not working
     - title: dropown to switch among files in directory
+    - title: Subtasks
+    - title: visual clue if subtasks are present

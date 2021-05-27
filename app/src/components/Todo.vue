@@ -30,20 +30,24 @@
                     />
                     <i class="fa fa-align-justify handle"></i>
                     &nbsp;
-                    <span v-if="config.subtasks">
+                    <span class="subtasks" v-if="config.subtasks">
                         <i
                             @click="toggleSubtasks(element)"
-                            v-if="element._showSubstasks"
-                            class="fa fa-chevron-up"
+                            v-bind:class="{
+                                fa: true,
+                                'fa-chevron-down': element._showSubstasks,
+                                'fa-chevron-right': !element._showSubstasks,
+                            }"
                         ></i>
-                        <i
-                            @click="toggleSubtasks(element)"
-                            v-else
-                            class="fa fa-chevron-down"
-                        ></i>
+                        <span
+                            v-bind:style="{
+                                opacity: (element.subtasks || []).length
+                                    ? 1
+                                    : 0,
+                            }"
+                            >({{ (element.subtasks || []).length }})</span
+                        >
                     </span>
-
-                    &nbsp;
                     {{ element.title }}
                 </div>
                 <div v-else>
@@ -411,8 +415,11 @@ export default {
     height: 0;
 }
 .todo__subtasks {
-    margin-left: 4rem;
+    margin-left: 5rem;
     color: gray;
+}
+.subtasks {
+    color: #aeaeae;
 }
 .add-todo {
     margin: 1rem;
