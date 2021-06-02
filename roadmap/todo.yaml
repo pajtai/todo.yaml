@@ -1,6 +1,7 @@
 todo:
     - title: 'Bug: "x" should be inline with file path'
     - title: switch to css grid
+    - title: make subtasks sortable
     - title: group dates, today, tomorrow, next week, etc
     - title: md support using https://www.npmjs.com/package/marked
     - title: Columns not always equal - rh margin too big on mobile - mobile in general

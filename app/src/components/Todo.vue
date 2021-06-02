@@ -17,123 +17,13 @@
         :sort="true"
     >
         <template #item="{ element }">
-            <li class="todo__item" v-if="element && show(element)">
-                <div
-                    v-if="!element._editing"
-                    @dblclick="edit(element)"
-                    style="position: relative; margin-right: 1rem"
-                >
-                    <input
-                        class="todo__input"
-                        v-model="element.done"
-                        type="checkbox"
-                    />
-                    <i class="fa fa-align-justify handle"></i>
-                    &nbsp;
-                    <span class="subtasks" v-if="config.subtasks">
-                        <i
-                            @click="toggleSubtasks(element)"
-                            v-bind:class="{
-                                fa: true,
-                                'fa-chevron-down': element._showSubstasks,
-                                'fa-chevron-right': !element._showSubstasks,
-                            }"
-                        ></i>
-                        <span
-                            v-bind:style="{
-                                opacity: (element.subtasks || []).length
-                                    ? 1
-                                    : 0,
-                            }"
-                            >({{ (element.subtasks || []).length }})</span
-                        >
-                    </span>
-                    {{ element.title }}
-                </div>
-                <div v-else>
-                    <input
-                        v-todo-focus="element._editing"
-                        v-model="editedString"
-                        @blur="cancelEdit(element)"
-                        @keyup.enter="doneEdit(element)"
-                        type="text"
-                    />
-                </div>
-                <div class="todo__importance" v-if="config.columns.importance">
-                    <span
-                        v-if="!element._editingImportance && element.importance"
-                        @dblclick="editImportance(element)"
-                        >{{ element.importance }}</span
-                    >
-                    <span
-                        v-if="
-                            !element._editingImportance && !element.importance
-                        "
-                        @dblclick="editImportance(element)"
-                        class="todo__importance_empty"
-                        >Add Importance</span
-                    >
-                    <input
-                        v-if="element._editingImportance"
-                        v-todo-focus="element._editingImportance"
-                        v-model="editedString"
-                        @blur="cancelEdit(element)"
-                        @keyup.enter="doneEditImportance(element)"
-                        type="number"
-                    />
-                </div>
-                <div v-if="config.columns.notes" class="notes">
-                    <span
-                        v-if="!element._editingNotes && element.notes"
-                        @dblclick="editNotes(element)"
-                        >{{ element.notes }}</span
-                    >
-                    <span
-                        class="todo__notes_empty"
-                        @dblclick="editNotes(element)"
-                        v-if="!element.notes && !element._editingNotes"
-                        >Add Note</span
-                    >
-                    <input
-                        v-todo-focus="element._editingNotes"
-                        v-if="element._editingNotes"
-                        v-model="editedString"
-                        @blur="cancelEdit(element)"
-                        @keyup.enter="doneEditNotes(element)"
-                        type="text"
-                    />
-                </div>
-                <div class="todo__date" v-if="config.columns.dueDate">
-                    <datepicker
-                        :placeholder="`No Due Date`"
-                        v-model="element.dueDate"
-                    />
-                </div>
-                <div class="break"></div>
-                <ul
-                    v-if="config.subtasks && element._showSubstasks"
-                    class="todo__subtasks"
-                >
-                    <li
-                        v-for="subtask in element.subtasks"
-                        v-bind:key="subtask"
-                    >
-                        <input
-                            class="todd__input"
-                            type="checkbox"
-                            @change="finishSubtask(subtask, element)"
-                        />{{ subtask }}
-                    </li>
-                </ul>
-                <input
-                    class="add-subtask__input"
-                    v-if="config.subtasks && element._showSubstasks"
-                    type="text"
-                    v-model="element._newSubtask"
-                    placeholder="Enter subtask"
-                    @keyup.enter="addSubtask(element)"
-                />
-            </li>
+            <todo-item
+                v-if="element && show(element)"
+                v-bind:config="config"
+                v-model:parentDone="element.done"
+                v-model:parentDueDate="element.dueDate"
+                v-model:parentTitle="element.title"
+            />
         </template>
     </draggable>
     <ul class="columns">
@@ -163,12 +53,13 @@
 
 <script>
 import draggable from "vuedraggable";
-import datepicker from "vue3-datepicker";
+// @ is an alias to /src
+import TodoItem from "@/components/TodoItem.vue";
 export default {
     name: "Todo",
     components: {
         draggable,
-        datepicker,
+        TodoItem,
     },
     props: ["config"],
     data() {
@@ -392,18 +283,6 @@ export default {
 };
 </script>
 <style>
-.todo__item {
-    cursor: pointer;
-    text-align: left;
-    background-color: #fff;
-    margin: 1rem;
-    padding: 0.5rem;
-    border-bottom: 1px solid #aeaeae50;
-}
-.todo__item {
-    display: flex;
-    flex-wrap: wrap;
-}
 .todo__input {
     cursor: pointer;
 }
