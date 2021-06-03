@@ -398,6 +398,7 @@ export default {
     margin: 1rem;
     padding: 0.5rem;
     border-bottom: 1px solid #aeaeae50;
+    z-index: 99;
 }
 .todo__item,
 .columns {
