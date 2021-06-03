@@ -115,6 +115,16 @@ ul {
     color: #42b983;
 }
 
+footer {
+    display: flex;
+}
+footer > ul {
+    flex: 9;
+}
+footer > div {
+    flex: 1 1 auto;
+    text-align: right;
+}
 footer,
 footer a {
     color: #ababab;

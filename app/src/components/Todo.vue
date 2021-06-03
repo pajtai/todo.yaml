@@ -9,6 +9,26 @@
             type="text"
         />
     </section>
+    <ul>
+        <li class="columns">
+            <div class="columns__title" @click="reOrder('title')">Title</div>
+            <div
+                class="columns__importance"
+                v-if="config.columns.importance"
+                @click="reOrder('importance')"
+            >
+                Importance
+            </div>
+            <div v-if="config.columns.notes">Notes</div>
+            <div
+                class="columns__due-date"
+                v-if="config.columns.dueDate"
+                @click="reOrder('dueDate')"
+            >
+                Due Date
+            </div>
+        </li>
+    </ul>
     <draggable
         v-model="todos"
         handle=".handle"
@@ -21,6 +41,7 @@
                 <div
                     v-if="!element._editing"
                     @dblclick="edit(element)"
+                    class="todo__title"
                     style="position: relative; margin-right: 1rem"
                 >
                     <input
@@ -136,29 +157,6 @@
             </li>
         </template>
     </draggable>
-    <ul class="columns">
-        <li class="todo__item">
-            <div class="columns__title" @click="reOrder('title')">
-                <input class="columns__checkbox" type="checkbox" />
-                Title
-            </div>
-            <div
-                class="columns__importance"
-                v-if="config.columns.importance"
-                @click="reOrder('importance')"
-            >
-                Importance
-            </div>
-            <div v-if="config.columns.notes">Notes</div>
-            <div
-                class="columns__due-date"
-                v-if="config.columns.dueDate"
-                @click="reOrder('dueDate')"
-            >
-                Due Date
-            </div>
-        </li>
-    </ul>
 </template>
 
 <script>
@@ -392,7 +390,8 @@ export default {
 };
 </script>
 <style>
-.todo__item {
+.todo__item,
+.columns {
     cursor: pointer;
     text-align: left;
     background-color: #fff;
@@ -400,16 +399,40 @@ export default {
     padding: 0.5rem;
     border-bottom: 1px solid #aeaeae50;
 }
-.todo__item {
+.todo__item,
+.columns {
     display: flex;
     flex-wrap: wrap;
 }
 .todo__input {
     cursor: pointer;
 }
-.todo__item > div {
+.todo__item > div,
+.columns > div {
     flex: 1;
 }
+.todo__item > .todo__title,
+.columns > .columns__title {
+    flex: 0 0 100%;
+}
+@media (min-width: 681px) {
+    .todo__item > div,
+    .columns > div {
+        flex: 1;
+    }
+    .todo__item > .todo__title,
+    .columns > .columns__title {
+        flex: 2;
+    }
+}
+
+.columns {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
 .todo__item > .break {
     flex-basis: 100%;
     height: 0;
@@ -450,18 +473,6 @@ export default {
 .v3dp__datepicker > input {
     border: none;
     cursor: pointer;
-}
-.columns {
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    -webkit-touch-callout: none; /* iOS Safari */
-    -webkit-user-select: none; /* Safari */
-    -khtml-user-select: none; /* Konqueror HTML */
-    -moz-user-select: none; /* Old versions of Firefox */
-    -ms-user-select: none; /* Internet Explorer/Edge */
-    user-select: none; /* Non-prefixed version, currently
-                                  supported by Chrome, Opera and Firefox */
 }
 .columns__importance:hover::after {
     content: "▾";

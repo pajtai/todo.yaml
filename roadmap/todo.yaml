@@ -1,6 +1,7 @@
 todo:
-    - title: 'Bug: "x" should be inline with file path'
-    - title: switch to css grid
+    - title: Add function to delete a todo
+    - title: dark mode/theming
+    - title: add screenshots
     - title: group dates, today, tomorrow, next week, etc
     - title: md support using https://www.npmjs.com/package/marked
     - title: Columns not always equal - rh margin too big on mobile - mobile in general
@@ -9,7 +10,6 @@ todo:
     - title: task count
     - title: pwd protect file
     - title: font size by priority
-    - title: Add function to delete a todo
     - title: server running indicator
     - title: option to filter by column value
     - title: custom columns
@@ -61,3 +61,4 @@ done:
     - title: dropown to switch among files in directory
     - title: Subtasks
     - title: visual clue if subtasks are present
+    - title: 'Bug: "x" should be inline with file path'
