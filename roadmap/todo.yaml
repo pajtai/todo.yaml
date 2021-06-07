@@ -1,6 +1,14 @@
 todo:
+    - title:
+          add ability to star subtasks so they are shown and can be sorted in the
+          main view
+    - title: add ability to have a standard way to manage projects, goals, etc
+          (multiple files?)
+    - title: add ability to categorize tasks
     - title: Add function to delete a todo
     - title: dark mode/theming
+    - title: add some standard configuration options, "simple task list,
+          projects+tasks" etc
     - title: add screenshots
     - title: group dates, today, tomorrow, next week, etc
     - title: md support using https://www.npmjs.com/package/marked

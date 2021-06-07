@@ -44,6 +44,14 @@
                     class="todo__title"
                     style="position: relative; margin-right: 1rem"
                 >
+                    <i
+                        @click="toggleNextAction(element)"
+                        v-bind:class="{
+                            fa: true,
+                            'fa-star': element.nextAction,
+                            'fa-star-o': !element.nextAction,
+                        }"
+                    ></i>
                     <input
                         class="todo__input"
                         v-model="element.done"
@@ -139,11 +147,19 @@
                         v-for="subtask in element.subtasks"
                         v-bind:key="subtask"
                     >
+                        <i
+                            @click="toggleNextAction(subtask)"
+                            v-bind:class="{
+                                fa: true,
+                                'fa-star': subtask.nextAction,
+                                'fa-star-o': !subtask.nextAction,
+                            }"
+                        ></i>
                         <input
                             class="todd__input"
                             type="checkbox"
                             @change="finishSubtask(subtask, element)"
-                        />{{ subtask }}
+                        />{{ subtask.title }}
                     </li>
                 </ul>
                 <input
@@ -276,6 +292,10 @@ export default {
             todo._showSubstasks = !todo._showSubstasks;
             console.log(todo._showSubstasks);
         },
+        toggleNextAction(todo) {
+            todo.nextAction = !todo.nextAction;
+            this.reOrder();
+        },
         createTodo(title) {
             let newTodo = {};
 
@@ -291,6 +311,14 @@ export default {
         },
         reOrder(column) {
             this.todos.sort((a, b) => {
+                const nextA = a["nextAction"];
+                const nextB = b["nextAction"];
+                if (nextA && !nextB) {
+                    return -1;
+                }
+                if (!nextA && nextB) {
+                    return 1;
+                }
                 const diff = a[column] - b[column];
                 switch (column) {
                     case "importance":
@@ -304,7 +332,6 @@ export default {
                         if (diff < 0) return -1;
                         break;
                     case "title":
-                        console.log("sort");
                         if (a[column].toLowerCase() < b[column].toLowerCase())
                             return -1;
                         if (a[column].toLowerCase() > b[column].toLowerCase())

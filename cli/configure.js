@@ -6,6 +6,7 @@ export async function configure(configuration) {
         "Close window & shutdown server button in lower right of screen";
     const ADD_TODOS_UP_TOP = "Add todos to the top of the list";
     const SUBTASKS = "Use subtasks";
+    const NEXT_ACTIONS = "Use stars to mark items to do next";
     let defaults = [];
     if (configuration.saveCompleted) {
         defaults.push(SAVE_COMPLETED_TODOS);
@@ -19,6 +20,9 @@ export async function configure(configuration) {
     if (configuration.subtasks) {
         defaults.push(SUBTASKS);
     }
+    if (configuration.nextActions) {
+        defaults.push(NEXT_ACTIONS);
+    }
     let answers = await inquirer.prompt([
         {
             name: "configure",
@@ -30,6 +34,7 @@ export async function configure(configuration) {
                 SAVE_COMPLETED_TODOS,
                 SHUTDOWN_SERVER_BUTTON,
                 SUBTASKS,
+                NEXT_ACTIONS,
             ],
             default: defaults,
         },
@@ -41,6 +46,7 @@ export async function configure(configuration) {
         SHUTDOWN_SERVER_BUTTON
     );
     configuration.subtasks = answers.configure.includes(SUBTASKS);
+    configuration.nextActions = answers.configure.includes(NEXT_ACTIONS);
 
     const columns = [
         { name: "Due Date", value: "dueDate" },

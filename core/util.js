@@ -25,6 +25,28 @@ export function ensureTodoStructure(configuration) {
             delete todo.importance;
         }
 
+        if (configuration.nextActions) {
+            todo.nextAction = todo.nextAction || false;
+        } else {
+            delete todo.nextAction;
+        }
+
+        if (configuration.subtasks && todo.subtasks) {
+            todo.subtasks = todo.subtasks.map((subtask) => {
+                if (typeof subtask === "string") {
+                    subtask = {
+                        title: subtask,
+                    };
+                }
+                if (configuration.nextActions) {
+                    subtask.nextAction = subtask.nextAction || false;
+                } else {
+                    delete subtask.nextAction;
+                }
+                return subtask;
+            });
+        }
+
         return todo;
     };
 }
