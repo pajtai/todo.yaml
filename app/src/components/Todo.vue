@@ -422,9 +422,9 @@ export default {
     cursor: pointer;
     text-align: left;
     background-color: #fff;
-    margin: 1rem;
-    padding: 0.5rem;
-    border-bottom: 1px solid #aeaeae50;
+    margin: 0;
+    padding: 0.75rem 0.5rem 0.5rem;
+    border-bottom: 1px solid #f0ffff;
     z-index: 99;
 }
 .todo__item,
@@ -473,8 +473,9 @@ export default {
     color: #aeaeae;
 }
 .add-todo {
-    margin: 1rem;
-    padding: 0.5rem;
+    margin: 0;
+    padding: 0.75rem 0.5rem 0.5rem;
+    border-bottom: 1px solid #f0ffff;
 }
 .add-todo__input {
     border: none;
