@@ -147,14 +147,14 @@
                         v-for="subtask in element.subtasks"
                         v-bind:key="subtask"
                     >
-                        <i
-                            @click="toggleNextAction(subtask)"
-                            v-bind:class="{
-                                fa: true,
-                                'fa-star': subtask.nextAction,
-                                'fa-star-o': !subtask.nextAction,
-                            }"
-                        ></i>
+                        <!--                        <i-->
+                        <!--                            @click="toggleNextAction(subtask)"-->
+                        <!--                            v-bind:class="{-->
+                        <!--                                fa: true,-->
+                        <!--                                'fa-star': subtask.nextAction,-->
+                        <!--                                'fa-star-o': !subtask.nextAction,-->
+                        <!--                            }"-->
+                        <!--                        ></i>-->
                         <input
                             class="todd__input"
                             type="checkbox"
@@ -282,7 +282,7 @@ export default {
         },
         addSubtask(todo) {
             todo.subtasks = todo.subtasks || [];
-            todo.subtasks.push(todo._newSubtask);
+            todo.subtasks.push({ title: todo._newSubtask, nextAction: false });
             todo._newSubtask = "";
         },
         finishSubtask(subtask, todo) {

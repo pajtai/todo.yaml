@@ -44,6 +44,7 @@ To interactively configure your `todo.yaml`, run `todo configure`.
 The interactive configuration will automatically set the following for you based on your choices:
 
 - `addTodosToTop` Option to add new todos at the top of the list vs the bottom
+- `nextActions` Option to star todos and have them be ordered as top priority
 - `saveCompleted` Option to save completed todos
 - `shuddownServerButton` Option to add an `X` button in the lower right of the GUI that will close the window and shutdown the server  
 - `subtasks` Option to track subtasks
