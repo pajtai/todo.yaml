@@ -45,6 +45,7 @@
                     style="position: relative; margin-right: 1rem"
                 >
                     <i
+                        v-if="config.nextActions"
                         @click="toggleNextAction(element)"
                         v-bind:class="{
                             fa: true,

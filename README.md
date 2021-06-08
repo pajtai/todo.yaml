@@ -35,6 +35,29 @@ _Square brackets indicate an optional arguments._
 - To add a todo, type it into the input and hit enter.
 - To switch between yaml files in the same directory use the dropdown. You should configure each yaml file with the CLI before you start interacting with it.
 
+## Screenshots
+Below are several screenshots of what the GUI can be configured to look like.
+
+### A Simple List
+
+![Simple List](screenshots/simple-list.png)
+
+### Forward Slash Search
+
+![Forward Slash Search](screenshots/forward-slash-search.png)
+
+### Next Actions
+
+![Next Actions](screenshots/next-actions.png)
+
+### Subtasks
+
+![Subtasks](screenshots/subtasks.png)
+
+### Columns
+
+![Columns](screenshots/columns.png)
+
 ## Configuration
 
 The app will listen on `process.env.PORT`, or, if that's not present, `3000`.

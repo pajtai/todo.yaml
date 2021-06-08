@@ -1,4 +1,5 @@
 todo:
+    - title: configure runs twice
     - title:
           add ability to star subtasks so they are shown and can be sorted in the
           main view
