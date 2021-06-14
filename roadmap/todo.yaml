@@ -1,17 +1,12 @@
 todo:
+    - title: next action isn't always prioritized first
+    - title: _showSubtasks should not be saved
     - title: Subtask input should be at the same indentation level as subtasks
-      _showSubstasks: null
-      subtasks: null
     - title: Ability to sort subtasks
-      _showSubstasks: null
-      subtasks: null
     - title: Ability to edit subtasks
-      _showSubstasks: null
-      subtasks: null
     - title:
           add ability to star subtasks so they are shown and can be sorted in the
           main view
-      _showSubstasks: true
       subtasks:
           - title: Create guids for each task
             nextAction: false

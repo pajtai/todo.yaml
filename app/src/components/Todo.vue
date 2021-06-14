@@ -65,8 +65,8 @@
                             @click="toggleSubtasks(element)"
                             v-bind:class="{
                                 fa: true,
-                                'fa-chevron-down': element._showSubstasks,
-                                'fa-chevron-right': !element._showSubstasks,
+                                'fa-chevron-down': element._showSubtasks,
+                                'fa-chevron-right': !element._showSubtasks,
                             }"
                         ></i>
                         <span
@@ -141,7 +141,7 @@
                 </div>
                 <div class="break"></div>
                 <ul
-                    v-if="config.subtasks && element._showSubstasks"
+                    v-if="config.subtasks && element._showSubtasks"
                     class="todo__subtasks"
                 >
                     <li
@@ -165,7 +165,7 @@
                 </ul>
                 <input
                     class="add-subtask__input"
-                    v-if="config.subtasks && element._showSubstasks"
+                    v-if="config.subtasks && element._showSubtasks"
                     type="text"
                     v-model="element._newSubtask"
                     placeholder="Enter subtask"
@@ -290,8 +290,7 @@ export default {
             todo.subtasks.splice(todo.subtasks.indexOf(subtask), 1);
         },
         toggleSubtasks(todo) {
-            todo._showSubstasks = !todo._showSubstasks;
-            console.log(todo._showSubstasks);
+            todo._showSubtasks = !todo._showSubtasks;
         },
         toggleNextAction(todo) {
             todo.nextAction = !todo.nextAction;
