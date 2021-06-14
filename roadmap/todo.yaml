@@ -1,6 +1,5 @@
 todo:
     - title: next action isn't always prioritized first
-    - title: _showSubtasks should not be saved
     - title: Subtask input should be at the same indentation level as subtasks
     - title: Ability to sort subtasks
     - title: Ability to edit subtasks
@@ -9,9 +8,7 @@ todo:
           main view
       subtasks:
           - title: Create guids for each task
-            nextAction: false
           - title: pull the guid up to the main list when a subtask is starred
-            nextAction: false
     - title: add ability to have a standard way to manage projects, goals, etc
           (multiple files?)
     - title: add ability to categorize tasks
@@ -91,3 +88,4 @@ done:
     - title: Subtasks
     - title: visual clue if subtasks are present
     - title: 'Bug: "x" should be inline with file path'
+    - title: _showSubtasks should not be saved

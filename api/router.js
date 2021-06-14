@@ -13,7 +13,6 @@ export const router = Router();
 router.get("/todo", async (req, res) => {
     // ensure .. etc cannot be passed into getTodos
     const file = basename(req.query.file || configs.TODO_FILE_NAME);
-    console.log(`Getting file ${file} - ${req.query.file}`);
     const todos = await getTodos(file);
     res.json(todos.todo.map(ensureTodoStructure(todos.configuration)));
 });
