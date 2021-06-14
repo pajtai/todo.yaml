@@ -1,15 +1,37 @@
 todo:
-    - title: configure runs twice
+    - title: Subtask input should be at the same indentation level as subtasks
+      _showSubstasks: null
+      subtasks: null
+    - title: Ability to sort subtasks
+      _showSubstasks: null
+      subtasks: null
+    - title: Ability to edit subtasks
+      _showSubstasks: null
+      subtasks: null
     - title:
           add ability to star subtasks so they are shown and can be sorted in the
           main view
+      _showSubstasks: true
+      subtasks:
+          - title: Create guids for each task
+            nextAction: false
+          - title: pull the guid up to the main list when a subtask is starred
+            nextAction: false
     - title: add ability to have a standard way to manage projects, goals, etc
           (multiple files?)
     - title: add ability to categorize tasks
+    - title: add separate github.io website
     - title: Add function to delete a todo
     - title: dark mode/theming
+    - title: default values
+    - title: add ability to configure via gui
+    - title: favicon should show nicely for both dark and light mode
+    - title:
+          one line todos (with nesting) a la todo.txt - could just use json - !
+          (100) due:2021-06-10 "Description Of Task" @"The Category" :"Some Notes"
     - title: add some standard configuration options, "simple task list,
           projects+tasks" etc
+    - title: configure runs twice sometimes?
     - title: add screenshots
     - title: group dates, today, tomorrow, next week, etc
     - title: md support using https://www.npmjs.com/package/marked
@@ -41,8 +63,11 @@ configuration:
     columns:
         dueDate: false
         notes: false
+        importance: false
     shutdownServerButton: true
     addTodosToTop: true
+    subtasks: true
+    nextActions: false
 done:
     - title: Add todo via GUI
     - title: Complete todo via GUI
